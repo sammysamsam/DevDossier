@@ -45,10 +45,8 @@ var UpdateSkillsREACT = React.createClass({
 			<div>
 				<div className = "container">
 					<div className = "row" >
-
+					</div>
 				</div>
-
-				{this.renderEditable()}
 			</div>
 		)
 	}
