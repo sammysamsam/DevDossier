@@ -4,13 +4,11 @@ var ProfileREACT = React.createClass({
 		console.log(this.props)
 		return {
 			editingSTATE: false,
-
 			firstname:this.props.profile.first_name||"",
 			lastname:this.props.profile.last_name||"",
 			education:this.props.profile.education||"",
 			courses:this.props.profile.courses||"",
 			location:this.props.profile.location||"",
-			skills:this.props.profile.skills||"",
 			aboutme:this.props.profile.aboutme||""
 		}
 	},

@@ -12,7 +12,6 @@ var UpdateProfileREACT = React.createClass({
 			location:this.props.profile.location||"",
 			skills:this.props.profile.skills||"",
 
-			skillsInput:["",""],
 			aboutme:this.props.profile.aboutme||""
 		}
 	},

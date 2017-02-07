@@ -5,7 +5,6 @@ var UpdateSkillsREACT = React.createClass({
 		return {
 			editingSTATE: false,
 			project: this.props.profile,
-			skills:this.props.profile.skills||""
 		}
 	},
 
