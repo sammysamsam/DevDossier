@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Devos</title>
+  </head>
+
+  <body>
+	  <%= link_to "Homepage", root_path, method: :get %>
+	  <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+
+	  <%= react_component('ProfileREACT', {:profile => @profile,:editable => @editable}) %>
+
+	 <hr/>
+
+	  <%= react_component('SkillsREACT', {:editable => @editable}) %>
+
+  </body>
+</html>

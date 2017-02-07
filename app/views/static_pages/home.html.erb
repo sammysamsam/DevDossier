@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Devos</title>
+
+  </head>
+
+  <body>
+  <h1> Devos: Developer's Dossier</h1>
+
+  <% 
+  	prompt = "Sign In"
+  	if(user_signed_in?)
+  		prompt = "Profile"
+  	end
+  	%>
+
+  <%= link_to "Sign up", new_user_registration_path, method: :get %>
+  <%= link_to "#{prompt}", profile_path(@user), method: :get %>
+  </body>
+</html>

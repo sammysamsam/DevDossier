@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Devos</title>
+
+  </head>
+  <body>
+  	<h1> Welcome To Your New Profile</h1>
+
+	<ul>
+	<% if @profile.errors.any? %>
+		<% @profile.errors.full_messages.each do |msg| %>
+		<li><%= msg %></li>
+		<% end %>
+	<% end %>
+	</ul>
+	<
+	<%= react_component('UpdateProfileREACT', profile: @profile, stage: "new" ) %>
+    <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+  </body>
+</html>
