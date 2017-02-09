@@ -5,6 +5,7 @@ class CreateProfiles < ActiveRecord::Migration[5.0]
       t.string :last_name
       t.integer :age
       t.text :skills
+      t.string :location
       t.text :languages
       t.string :education
       t.text :classes
