@@ -8,7 +8,7 @@ class CreateProfiles < ActiveRecord::Migration[5.0]
       t.string :location
       t.text :languages
       t.string :education
-      t.text :classes
+      t.text :courses
       t.string :aboutme
       t.timestamps
     end
