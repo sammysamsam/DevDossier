@@ -1,17 +1,20 @@
 var UpdateProfileREACT = React.createClass({
 	getInitialState: function() {
-	console.log(this.props)
+
+		//parse education
+		console.log(this.props);
+		let education = {educationinfo:[]};
+		if(this.props.profile.education != null)
+			education = JSON.parse(this.props.profile.education);
 		return {
 			firstname:this.props.profile.first_name||"",
 			lastname:this.props.profile.last_name||"",
-			education:this.props.profile.education||"",
-
-			educationInput:["","",""],
+			education:education,
 
 			courses:this.props.profile.courses||"",
 			location:this.props.profile.location||"",
-			skills:this.props.profile.skills||"",
-
+			
+			skills:this.props.profile.skills,
 			aboutme:this.props.profile.aboutme||""
 		}
 	},
@@ -24,16 +27,7 @@ var UpdateProfileREACT = React.createClass({
 	},
 	updateLocation: function(e_){
 		this.setState({location:e_.target.value})
-	},
-	updateEducation: function(){
-		var result = this.state.education;
-		if(result == "")
-			result = this.state.educationInput[0]+"--"+ this.state.educationInput[1]+" "+this.state.educationInput[2]
-		else
-			result = result + "||"+this.state.educationInput[0]+"--"+ this.state.educationInput[1]+" "+this.state.educationInput[2]
-
-		this.setState({education:result})
-	},
+	},	
 	updateSkills: function(e_){
 		this.setState({skills:e_.target.value})
 	},
@@ -44,51 +38,67 @@ var UpdateProfileREACT = React.createClass({
 		this.setState({aboutme:e_.target.value})
 	},
 
+
+//
+//	["NYU--BA--chemistry || NYU--BA--chemistry"]
 //
 
-	updateEducationInput1: function(e_){
-		var input = this.state.educationInput
-		input[0] = e_.target.value;
-		this.setState({educationInput:input})
+
+	updateEducationInput1: function(index,e_){
+		var ed = this.state.education.educationinfo;
+		ed[index][0] = e_.target.value;
+		this.setState({education:{educationinfo:ed}})		
+	},
+	updateEducationInput2: function(index,e_){
+		var ed = this.state.education.educationinfo;
+		ed[index][1] = e_.target.value;
+		this.setState({education:{educationinfo:ed}})	
+	},
+	updateEducationInput3: function(index,e_){
+		var ed = this.state.education.educationinfo;
+		ed[index][2] = e_.target.value;
+		this.setState({education:{educationinfo:ed}})	
+	},
+//
+
+	addEducation: function(){
+		var ed = this.state.education.educationinfo
+		ed.push(["","",""]);
+		this.setState({education:{educationinfo:ed}});
 	},
 
-	updateEducationInput2: function(e_){
-		var input = this.state.educationInput
-		input[1] = e_.target.value
-		this.setState({educationInput:input})
-	},
-
-	updateEducationInput3: function(e_){
-		var input = this.state.educationInput
-		input[2] = e_.target.value
-		this.setState({educationInput:input})
-	},
-
-	getEducation: function(){
-			return this.state.education.split("||");
-	},
-
-	deleteEducation: function(index){
-		var list = this.getEducation();
+	deleteEducation: function(nothing,index){
+		var list = this.state.education.educationinfo;
 		list.splice(index,1);
-		var result = list.toString()
-		result = result.replace(/,/g , "");
-		this.setState({education:result});
+		this.setState({education:{educationinfo:list}});
 	},
 
+	processEducation: function(){
+		var ed = this.state.education.educationinfo;
+		var result = [];
+		for(var i = 0; i < ed.length; i++)
+		{
+			var test = ed[i][0];
+			if(test.replace(/\W/g, '') == "")
+				continue;
+			result.push(ed[i]);
+		}
+
+		return result;
+	},
 //
 
 
 	submitButtons: function(){
 		ref = this.state
-
+		var education = JSON.stringify(this.state.education);
 		var link = Routes.create_profile_path(
 			{profile: 
 				{first_name:ref.firstname, 
 				last_name:ref.lastname,
 				courses:ref.courses, 
 				location:ref.location,
-				education:ref.education,
+				education:education,
 				skills:ref.skills, 
 				aboutme:ref.aboutme}
 			}
@@ -102,17 +112,17 @@ var UpdateProfileREACT = React.createClass({
 					last_name:ref.lastname,
 					courses:ref.courses, 
 					location:ref.location,
-					education:ref.education,
+					education:education,
 					skills:ref.skills, 
 					aboutme:ref.aboutme}
 				}
 			)
 			return(	
-			<div>
-				<button className="button" onClick = {this.props.toggle}> nevermind </button>&nbsp;
-				<a className="button button-primary" href = {link}> submit </a>
-			</div>
-		)
+				<div>
+					<button className="button" onClick = {this.props.toggle}> nevermind </button>&nbsp;
+					<a className="button button-primary" href = {link}> submit </a>
+				</div>
+			)
 		}
 
 		return(	
@@ -126,36 +136,50 @@ var UpdateProfileREACT = React.createClass({
 //
 
 	renderEducation: function(){
-		var education = this.getEducation();
-		if (education.length == 1 && education[0] == "" )
+		var education = this.state.education.educationinfo;
+		console.log(education);
+		console.log(this.state.education)
+		if (education.length == 0)
 			return (<div></div>)
+
 		var x = this;
 		return(
-				<table className="u-full-width">
-				  <thead>
-				    <tr>
-				      <th>School + Year</th>
-				      <th>Degree </th>
-				      <th></th>
-				    </tr>
-				  </thead>
-				  <tbody>
-
+				<div>
 					{education.map(function(listValue,index){
-						var info = listValue.split("--");
+						var ind = index
 						return(
-							    <tr key = {index}>
-							      <td>{info[0]}</td>
-							      <td>{info[1]}</td>
-							      <td>	<p onClick = {() => x.deleteEducation(index)}>delete</p>	</td>
-							    </tr>
+						<div key = {index} className = "row" >
+
+							<div className = "six columns">				  
+						  		<label >Education (+ Year)</label>
+						  		<input onChange = {x.updateEducationInput1.bind(x,index)}  className = "u-full-width" placeholder={listValue[0]} id="education"/>
+						  	</div>
+
+							<div className = "three columns">				  
+						  		<label htmlFor="education_major">Major </label>
+						  		<input onChange = {x.updateEducationInput3.bind(x,index)}  className = "u-full-width" placeholder={listValue[1]} id="education_major"/>
+						  	</div>
+
+						  	<div className = "three columns">
+						  		<label htmlFor="education_degree">Degree</label>
+							   <select onChange = {x.updateEducationInput2.bind(x,index)} className = "u-full-width" id = "education_degree">
+		        					<option value=" "> "n/a" </option>
+		        					<option value="BA">Bachelor of Arts</option>
+		        					<option value="BS">Bachelor of Science</option>
+		        					<option value="Master">Masters</option>
+		        					<option value="PHD">PHD</option>
+		      					</select>
+	      					</div>
+	      					<p onClick = {x.deleteEducation.bind(x,index)}>delete</p>
+	      				</div>
 						)
 					})}	
 
-				  </tbody>
-				</table>
+					</div>
 		)
 	},
+
+
 
 	render: function () {
 		return (
@@ -164,23 +188,23 @@ var UpdateProfileREACT = React.createClass({
 
 					<div className = "row" >
 						<div className = "five columns">
-      						<label for="first_name_input">First Name</label>
+      						<label htmlFor="first_name_input">First Name</label>
       						<input onChange = {this.updateFirstName} className = "u-full-width" placeholder={this.state.firstname} id="first_name_input"/>
       					</div>
 
 						<div className = "five columns">
-      						<label for="last_name_input">First Name</label>
+      						<label htmlFor="last_name_input">First Name</label>
       						<input onChange = {this.updateLastName} className = "u-full-width"  placeholder={this.state.lastname} id="last_name_input"/>
       					</div>
 
       					<div className = "two columns">
-      						<label for="city_input">City</label>
+      						<label htmlFor="city_input">City</label>
       						<input onChange = {this.updateLocation} className = "u-full-width" placeholder={this.state.location} id="city_input"/>
       					</div>
 					</div>
 
 					<div className = "row">
-					    <label for="about_me">About Me</label>
+					    <label htmlFor="about_me">About Me</label>
 					    <textarea onChange = {this.updateAboutMe}  className = "u-full-width" placeholder={this.state.aboutme} id="about_me"></textarea>
 				    </div>
 
@@ -189,34 +213,9 @@ var UpdateProfileREACT = React.createClass({
 					<div className = "row" >
 				    	{this.renderEducation()}
 				    </div>
-
-					<div className = "row" >
-
-						<div className = "six columns">				  
-					  		<label for="education">Education (+ Year)</label>
-					  		<input onChange = {this.updateEducationInput1}  className = "u-full-width" placeholder="Blue Mountain State '17 " id="education"/>
-					  	</div>
-						<div className = "three columns">				  
-					  		<label for="education_major">Major </label>
-					  		<input onChange = {this.updateEducationInput3}  className = "u-full-width" placeholder="..." id="education_major"/>
-					  	</div>
-
-					  	<div className = "three columns">
-					  		<label for="education_degree">Degree</label>
-						   <select onChange = {this.updateEducationInput2} className = "u-full-width" id = "education_degree">
-	        					<option value=" "> "n/a" </option>
-	        					<option value="BA">Bachelor of Arts</option>
-	        					<option value="BS">Bachelor of Science</option>
-	        					<option value="Master">Masters</option>
-	        					<option value="PHD">PHD</option>
-	      					</select>
-      					</div>
-
-      				</div>
-      					<div onClick = {this.updateEducation}>Add</div>
-
+					  <button className="button-primary" onClick = {this.addEducation}>Add</button>
 					<div>
-				    	<label for="courses_showcase">Courses Showcase </label>
+				    	<label htmlFor="courses_showcase">Courses Showcase </label>
 				   		<textarea onChange = {this.updateCourses} className = "u-full-width" placeholder={this.state.courses} id="courses_showcase"></textarea>
 				    </div>
 				    {this.submitButtons()}
@@ -225,7 +224,3 @@ var UpdateProfileREACT = React.createClass({
 		)
 	}
 });
-
-
-
-

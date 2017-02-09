@@ -1,12 +1,21 @@
 
 var ProfileREACT = React.createClass({
+
+
 	getInitialState: function() {
+
+		let education = {educationinfo:[]};
+		
+		if(this.props.profile.education != null)
+			education = JSON.parse(this.props.profile.education);
+
+		console.log("PROFILE");
 		console.log(this.props)
 		return {
 			editingSTATE: false,
 			firstname:this.props.profile.first_name||"",
 			lastname:this.props.profile.last_name||"",
-			education:this.props.profile.education||"",
+			education:education,
 			courses:this.props.profile.courses||"",
 			location:this.props.profile.location||"",
 			aboutme:this.props.profile.aboutme||""
@@ -20,12 +29,8 @@ var ProfileREACT = React.createClass({
 
 //
 
-	getEducation: function(){
-		return this.state.education.split("||");
-	},
-
 	renderEducationCourses: function(){
-		var education = this.getEducation();
+		var education = this.state.education.educationinfo
 		var courses = this.state.courses;
 
 		var style1 = {};
@@ -35,19 +40,18 @@ var ProfileREACT = React.createClass({
 			style1 = {display:"none"}
 		if(courses == "")
 			style2 = {display:"none"}
-
 		return (
 			<div>
 				<div className = "educationSection" style = {style1}>
 					<i className="fa fa-university"></i> &nbsp;
 						{education.map(function(listValue,index){
-							var info = listValue.split("--");
 							return(
 							<span  key = {index} className = "educationItem">
-								{info[0]} <span className = "educationCaption">{info[1]}</span>
+								{listValue[0]} <span className = "educationCaption">{listValue[1]+ " "+ listValue[2]}</span>
 							</span>
 							)
 						})}	
+
 				</div>
 
 				<div className = "courseSection" style = {style2}>
@@ -95,9 +99,9 @@ var ProfileREACT = React.createClass({
 							<h4 style = {{display:"inline"}}> {this.state.firstname + " " + this.state.lastname} </h4>  
 							<p style = {{display:"inline"}}> <i className="fa fa-street-view"></i> {this.state.location}</p>   	
 							
-							<div className = "aboutMeSection">
+							<h6>
 								{this.state.aboutme}
-							</div>	
+							</h6>	
 
 							{this.renderEducationCourses()}
 						</div>

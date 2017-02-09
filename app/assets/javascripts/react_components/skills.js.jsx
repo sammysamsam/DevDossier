@@ -1,10 +1,14 @@
 
 var SkillsREACT = React.createClass({
+
 	getInitialState: function() {
-		console.log(this.props)
+		var skills = {skillsinfo: [] };
+		if(this.props.profile.skills != null && this.props.profile.skills != "")
+			skills = JSON.parse(this.props.profile.skills);
+
 		return {
 			editingSTATE: false,
-			project: this.props.profile,
+			skills: skills,
 		}
 	},
 
@@ -15,13 +19,12 @@ var SkillsREACT = React.createClass({
 
 //
 
-//
 	renderEditable: function(){
 		if(this.state.editingSTATE == true && this.props.editable == true)
 			return(
-					<div>
-						<UpdateSkillsREACT profile = {this.props.profile} stage = "edit"/>
-					</div>
+				<div>
+					<NewSkillsREACT profile = {this.props.profile} toggle = {this.toggleEditState.bind(this)}/>
+				</div>
 			)
 		else
 			return(<div></div>)
@@ -31,7 +34,7 @@ var SkillsREACT = React.createClass({
 		if(this.state.editingSTATE == true || this.props.editable == false)
 			return(<div></div>)
 		else return(
-			<p onClick = {this.toggleEditState}>edit</p>
+			<button onClick = {this.toggleEditState}>edit</button>
 		)
 	},
 
@@ -40,8 +43,11 @@ var SkillsREACT = React.createClass({
 
 
 	render: function () {
+		console.log(this.state.skills)
 		return (
 			<div>
+				{this.renderEditButton()}
+				{this.renderEditable()}
 			</div>
 		)
 	}

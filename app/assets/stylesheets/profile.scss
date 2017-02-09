@@ -22,7 +22,6 @@
 	font-size:13px;
 }
 
-
 .courseSection{
 	font-size:16px;
 }
@@ -30,6 +29,16 @@
 	font-size:12px;
 }
 
-.skillsSection{
 
+.newSkillsContainer{
+
+}
+.skillsSelectorItem{
+	display:inline-block;
+	text-align: center;
+	height:50px;
+	width:33%;
+}
+.skillsTextBox{
+	max-height:500px;
 }

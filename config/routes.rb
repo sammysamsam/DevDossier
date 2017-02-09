@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 	
 	devise_for :user 
 
-   	get '/profile', to: 'profiles#show'
+   	get '/profile/', to: 'profiles#show'
    	get '/profile/create', to: 'profiles#create', as: 'create_profile'
   	resources :profiles, :except => [:show, :index,:create]
 

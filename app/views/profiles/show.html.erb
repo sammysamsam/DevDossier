@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Devos</title>
+    <script src="https://unpkg.com/classnames/index.js"></script>
   </head>
 
   <body>
@@ -12,7 +13,7 @@
 
 	 <hr/>
 
-	  <%= react_component('SkillsREACT', {:editable => @editable}) %>
+	  <%= react_component('SkillsREACT', {:profile => @profile, :editable => @editable}) %>
 
   </body>
 </html>

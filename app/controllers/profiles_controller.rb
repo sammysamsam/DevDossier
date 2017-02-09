@@ -12,8 +12,10 @@ class ProfilesController < ApplicationController
 			#make editable if project id = user id
 			if (@profile.user_id != current_user.profile_id) 
 				@editable = false
+
 			else
 				@editable = true
+
 			end
 		end
 	end
@@ -52,8 +54,13 @@ class ProfilesController < ApplicationController
 		#update only your own profile and profile exists
 		profile = Profile.find(current_user.profile_id)
 		if(profile && profile.user_id == current_user.profile_id)
-			profile.update(profile_params)
-			flash[:notice] = "Profile was successfully updated"
+
+			if (profile.update(profile_params))
+				flash[:notice] = "Profile was successfully updated"
+			else
+				puts "\n\n"+ profile.errors.full_messages.to_s
+				flash[:notice] = "Profile was unsuccessfully updated"
+			end
 		end
 		redirect_to profile_path
 	end
