@@ -1,6 +1,8 @@
 
-
+<% puts "\n\n\n\n\n" + @profile.skills %>
+<% if(@profile.skills != nil && @profile.skills != "") %>
 <% skillslist = JSON.parse(@profile.skills)  %>
+
 <% skillslist.each do |element| %>
     <div class = "row skillsCard_Container" >
        
@@ -55,4 +57,5 @@
                 <% end %> 
         </div>
       </div>
+<% end %>
 <% end %>

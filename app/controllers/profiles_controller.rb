@@ -7,14 +7,23 @@ class ProfilesController < ApplicationController
 		if (current_user.profile_id == nil)						#NEW USER
 			redirect_to new_profile_path					
 		else
-			@profile = Profile.find(current_user.profile_id)
 
-			#make editable if project id = user id
-			if (@profile.user_id != current_user.profile_id) 	#OTHER USERS
+			@profile = Profile.find_by_public_name(params[:public_name])
+			@current_profile = Profile.find(current_user.profile_id)
+			
+
+			if(@profile == nil)
+				redirect_to profile_path(public_name: @current_profile.public_name)
+			end			
+			
+			#make editable if profile id = user.profile id	
+			if (@profile.id != current_user.profile_id) 		#OTHER USERS
 				@editable = false
 			else
 				@editable = true								#USER
 			end
+
+			@currentfullname = @current_profile.first_name + " "+@current_profile.last_name
 		end
 	end
 
@@ -37,7 +46,6 @@ class ProfilesController < ApplicationController
 				flash[:notice] = "Profile was successfully created"
 				current_user.profile_id = @profile.id
 				current_user.save
-
 				redirect_to profile_path(public_name: @profile.public_name)
 			else
 				render 'new'
@@ -50,13 +58,12 @@ class ProfilesController < ApplicationController
 	def edit
 		#update only your own profile and profile exists
 		profile = Profile.find(current_user.profile_id)
-		if(profile && profile.user_id == current_user.profile_id)
 
+		if(profile != nil && profile.user_id == current_user.profile_id)
 			if (profile.update(profile_params))
 				flash[:notice] = "Profile was successfully updated"
 			else
-				puts "\n\n"+ profile.errors.full_messages.to_s
-				flash[:notice] = "Profile was unsuccessfully updated"
+				flash[:notice] = "Profile was unsuccessfully updated"+ profile.errors.full_messages.to_s
 			end
 		end
 		redirect_to profile_path(public_name: profile.public_name)
@@ -65,9 +72,14 @@ class ProfilesController < ApplicationController
 
 
 	def edit_skill
+		data = params.require(:profile).permit(:public_name,:skills)
 		profile = Profile.find(current_user.profile_id)
-		if(profile && profile.user_id == current_user.profile_id)
-			data = params.require(:profile).permit(:public_name,:skills)
+
+		if(!data)
+			redirect_to profile_path(public_name: profile.public_name, opened_page: "edit skill")
+		end
+
+		if(profile && profile.id == current_user.profile_id)
 			if (profile.update_attribute(:skills, data[:skills]) )
 				flash[:notice] = "Profile was successfully updated"
 			else

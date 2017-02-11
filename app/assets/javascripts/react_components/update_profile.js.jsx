@@ -1,3 +1,4 @@
+
 var UpdateProfileREACT = React.createClass({
 	getInitialState: function() {
 
@@ -7,6 +8,7 @@ var UpdateProfileREACT = React.createClass({
 		let education = [];
 		if(this.props.profile.education != null)
 			education = JSON.parse(this.props.profile.education);
+
 		return {
 			publicname:this.props.profile.public_name||"",
 			firstname:this.props.profile.first_name||"",
@@ -15,7 +17,9 @@ var UpdateProfileREACT = React.createClass({
 			courses:this.props.profile.courses||"",
 			location:this.props.profile.location||"",
 			skills:this.props.profile.skills,
-			aboutme:this.props.profile.aboutme||""
+			aboutme:this.props.profile.aboutme||"",
+
+			prompt:""
 		}
 	},
 	updatePublicName: function(e_){
@@ -39,6 +43,7 @@ var UpdateProfileREACT = React.createClass({
 	updateAboutMe: function(e_){
 		this.setState({aboutme:e_.target.value})
 	},
+
 
 
 //
@@ -77,8 +82,18 @@ var UpdateProfileREACT = React.createClass({
 
 
 //
+	isValid: function(str){
+		 return !/[~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/g.test(str);
+	},
 
 	sendInformation: function(){
+		if(!this.isValid(this.state.publicname) )
+		{
+			this.setState({prompt:"public name must not contain any special characters"});
+
+			return false;
+		}
+
 		ref = this.state
 		var ed = this.state.education;
 		var result = [];
@@ -117,9 +132,7 @@ var UpdateProfileREACT = React.createClass({
 					last_name:ref.lastname,
 					courses:ref.courses, 
 					location:ref.location,
-
 					education:education,
-
 					skills:ref.skills, 
 					aboutme:ref.aboutme}
 				}
@@ -142,7 +155,6 @@ var UpdateProfileREACT = React.createClass({
 				</div>
 			)
 		}
-
 		return(	
 			<div>
 				<button className="button-primary" onClick = {this.sendInformation}> Submit </button>
@@ -203,13 +215,21 @@ var UpdateProfileREACT = React.createClass({
 	render: function () {
 		return (
 			<div>
+		
 				<div className = "container ">
+
 					<div className = "row" >
-					<div className = "six columns">
-  						<label htmlFor="pub_name_input">Public Username</label>
-  						<input onChange = {this.updatePublicName} className = "u-full-width" value={this.state.publicname} id="pub_name_input"/>
+						<div className = "six columns">
+	  						<label htmlFor="pub_name_input">
+	  						Public Username 
+	  						</label>
+
+	  						<input onChange = {this.updatePublicName} className = "u-full-width" value={this.state.publicname} id="pub_name_input"/>
+	  					</div>
   					</div>
-  					</div>
+
+  				  	<p style = {{color:"red",fontSize:"10px"}}>{this.state.prompt}</p>
+					
 					<div className = "row" >
 						<div className = "five columns">
       						<label htmlFor="first_name_input">First Name</label>
@@ -217,7 +237,7 @@ var UpdateProfileREACT = React.createClass({
       					</div>
 
 						<div className = "five columns">
-      						<label htmlFor="last_name_input">First Name</label>
+      						<label htmlFor="last_name_input">Last Name</label>
       						<input onChange = {this.updateLastName} className = "u-full-width"  value={this.state.lastname} id="last_name_input"/>
       					</div>
 

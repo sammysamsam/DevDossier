@@ -7,24 +7,22 @@
 
   <body>
  
-  <div id = "landingPageContainer">
-  <h1 id = "landingPageLogo"> DevOs: Developer's Dossier</h1>
+    <div id = "landingPageContainer">
 
+      <h1 id = "landingPageLogo"> DevOs: Developer's Dossier</h1>
+      <div style = "width:285px;padding-top:30px;margin:auto;">
+        
+     
+          <%  if(@signed_in == true) %>
+              <%= link_to "Profile", profile_path(@PN),  :class => "LPButton" %>
+              <%= link_to "Sign Out", destroy_user_session_path,{method: :delete,:class => "LPButton"} %>
+          <% else  %>
+              <%= link_to "Sign in", new_user_session_path,  :class => "LPButton" %>
+              <%= link_to "Sign up", new_user_registration_path,  :class => "LPButton"%>
 
-
-  <div style = "width:255px;padding-top:30px;margin:auto;">
-
-    <%= link_to "Sign up", new_user_registration_path,  :class => "LPButton"%>
-
-
-    <%  if(@signed_in == true && @PN != "") %>
-        <%= link_to "Profile", profile_path(@PN),  :class => "LPButton" %>
-    <%  elsif(@signed_in) %>
-        <%= link_to "Profile", new_profile_path,  :class => "LPButton" %>
-    <% else  %>
-        <%= link_to "Sign in", new_user_session_path,  :class => "LPButton" %>
-    <% end%>
-</div>
-  </div>
+          <% end%>
+      </div>
+    </div>
+  
   </body>
 </html>

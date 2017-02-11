@@ -1,6 +1,6 @@
 
-var FElist = ["", "Angular.js","Ember.js", "React.js","Knockout.js","Aurelia.js","Vue.js","Polymer.js","WordPress","JQuery"]
-var BElist = ["", "Node.js","SQL","MongoDB","C#"]
+var FElist = ["", "Angular.js","React.js","Ember.js", "Knockout.js","Aurelia.js","Vue.js","Polymer.js","WordPress","JQuery"]
+var BElist = ["", "Node.js","SQL","MongoDB","C#","PHP","Ruby","Scala","Clojure"]
 var FSlist = ["", "Ruby On Rails","MEAN","LAMP","Python"]
 
 var NewSkillsREACT = React.createClass({

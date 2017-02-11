@@ -2,6 +2,8 @@
 var UpdateSkillsREACT = React.createClass({
 
 	getInitialState: function() {
+		console.log(this.props.profile)
+			console.log(this.props.editable)
 		var skills = {skillsinfo: [] };
 		if(this.props.profile.skills != null && this.props.profile.skills != "")
 			skills = JSON.parse(this.props.profile.skills);

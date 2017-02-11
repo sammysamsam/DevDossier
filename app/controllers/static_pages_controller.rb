@@ -6,7 +6,7 @@ class StaticPagesController < ApplicationController
 				profile = Profile.find(current_user.profile_id)	
 				@PN = profile.public_name
 			else 
-				@PN = ""
+				redirect_to new_profile_path
 			end
 		else
 			@signed_in = false
