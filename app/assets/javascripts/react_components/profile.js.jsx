@@ -83,7 +83,7 @@ var ProfileREACT = React.createClass({
 		if(this.state.editingSTATE == true || this.props.editable == false)
 			return(<div></div>)
 		else return(
-			<p onClick = {this.toggleEditState}>edit</p>
+			<div onClick = {this.toggleEditState} id = "profileeditbutton">edit</div>
 		)
 	},
 

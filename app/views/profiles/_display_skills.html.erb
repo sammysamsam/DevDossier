@@ -1,4 +1,5 @@
 
+<hr/>
 <% puts "\n\n\n\n\n" + @profile.skills %>
 <% if(@profile.skills != nil && @profile.skills != "") %>
 <% skillslist = JSON.parse(@profile.skills)  %>
@@ -57,5 +58,6 @@
                 <% end %> 
         </div>
       </div>
+     <hr/>
 <% end %>
 <% end %>

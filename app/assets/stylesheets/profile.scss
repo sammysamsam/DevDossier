@@ -6,6 +6,17 @@
 #generalInfoSection{
 	padding:60px 15px 60px 15px;
 }
+#profileeditbutton{
+	color:#68615f;
+	font-weight:bold;
+	font-size:12px;
+	cursor:pointer;
+}
+#profileeditbutton:hover{
+	font-size:13px;
+	color:#bf360c;
+}
+
 .aboutMeSection{
 	font-size:15px;
 	padding-bottom: 10px;
@@ -30,6 +41,9 @@
 .courseItem{
 	font-size:12px;
 }
+
+
+
 
 .edit_addSkillsButtonContainer
 {
@@ -70,7 +84,7 @@
 	border-radius:10px;
 }
 .skillsCard_Section{
-padding-top:30px;
+	padding-top:30px;
 }
 .skillsCard_Info{
 font-size:13px;
@@ -82,9 +96,10 @@ font-size:13px;
 	height:30px;
 }
 .skillsCard_Title{
-	font-weight: thin;
-	font-size:14px;
+	font-weight: bold;
+	font-size:16px;
 	margin-top:-30px;
+	font-family: 'Roboto','Raleway';
 	padding-top:10px;
 	height:50px;
 
