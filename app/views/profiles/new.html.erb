@@ -5,6 +5,8 @@
 
   </head>
   <body>
+
+  	<div class = "container">
   	<h1> Welcome To Your New Profile</h1>
 
 	<ul>
@@ -17,7 +19,8 @@
 	<
 	
 	<%= react_component('UpdateProfileREACT', profile: @profile, stage: "new" ) %>
+	
     <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
-    
+    </div>
   </body>
 </html>
