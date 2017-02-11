@@ -1,5 +1,5 @@
 class Profile < ApplicationRecord
-
+	validates :public_name, uniqueness: {case_sensitive: true}, presence: true, length: {minimum: 1, maximum: 50}
 	validates :first_name, presence: true, length: {minimum: 1, maximum: 50}
 	validates :last_name, presence: true, length: {minimum: 1, maximum: 50}
 	validates :location, presence: true, length: {minimum: 1, maximum: 50}

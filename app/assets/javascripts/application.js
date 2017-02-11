@@ -16,6 +16,6 @@
 //= require react
 //= require react_ujs
 //= require js-routes
-
+//= require Chart
 //= require components
-//= require_tree ./react_components
+//= require_tree .

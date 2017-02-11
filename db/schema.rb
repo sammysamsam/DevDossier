@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 20170206215827) do
   enable_extension "plpgsql"
 
   create_table "profiles", force: :cascade do |t|
+    t.string   "public_name"
     t.string   "first_name"
     t.string   "last_name"
     t.string   "location"
@@ -23,8 +24,8 @@ ActiveRecord::Schema.define(version: 20170206215827) do
     t.string   "education"
     t.text     "courses"
     t.string   "aboutme"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.integer  "user_id"
   end
 

@@ -2,18 +2,26 @@
 <html>
   <head>
     <title>Devos</title>
-    <script src="https://unpkg.com/classnames/index.js"></script>
   </head>
 
   <body>
-	  <%= link_to "Homepage", root_path, method: :get %>
-	  <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
 
-	  <%= react_component('ProfileREACT', {:profile => @profile,:editable => @editable}) %>
 
-	 <hr/>
 
-	  <%= react_component('SkillsREACT', {:profile => @profile, :editable => @editable}) %>
+  		<div>
+	  		<%= link_to "Homepage", root_path, method: :get %>
+	  		<%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+	  	</div>
 
+	  	<%= react_component('ProfileREACT', {:profile => @profile,:editable => @editable}) %>
+			
+		<div class = "container">
+				<%= render partial: "display_skills", locals: {:profile => @profile} %>
+
+
+	 	 <%= react_component('UpdateSkillsREACT', {:profile => @profile, :editable => @editable}, :currState => @opened_page) %> 
+	 	 <hr/>
+	 	 
+		</div>
   </body>
 </html>

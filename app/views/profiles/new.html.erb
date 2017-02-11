@@ -15,7 +15,9 @@
 	<% end %>
 	</ul>
 	<
+	
 	<%= react_component('UpdateProfileREACT', profile: @profile, stage: "new" ) %>
     <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+    
   </body>
 </html>

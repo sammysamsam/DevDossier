@@ -1,0 +1,58 @@
+
+
+<% skillslist = JSON.parse(@profile.skills)  %>
+<% skillslist.each do |element| %>
+    <div class = "row skillsCard_Container" >
+       
+
+        <div class = "five columns skillsCard_Section">
+
+           <div class = "skillsCard_Title">
+            <%= element[0].upcase %>
+          </div>
+            <div class = "skillsCard_Heading">EDUCATION </div>
+            
+            <% if (element[1]["self"] || element[1]["school"]) %>
+                <% if (element[1]["self"]) %>
+                    <span>Self-Taught </span>
+                    <i style = "color:green" class="fa fa-check-square-o" aria-hidden="true"></i>
+                    <br/>
+                 <%end%>
+                <% if (element[1]["school"]) %>
+                    <span>Courses Taken </span>
+                    <i style = "color:green" class="fa fa-check-square-o" aria-hidden="true"></i>
+                                   <br/>   
+                <%end%>
+
+                <p class = "skillsCard_Info"><%= element[1]["educationinfo"] %></p>
+            <% end %>
+         </div>
+
+        
+        <div class = "seven columns skillsCard_Section" style = "margin-top:30px;">
+            <div class = "skillsCard_Heading">EXPERIENCE </div>
+                <% if (element[2]["exptype"] != "") %>
+                      <% if (element[2]["exptype"] == "work") %>
+                       <i class="fa fa-building-o" aria-hidden="true"></i> <%= element[2]["header"]%>   
+                      <% end %>
+
+                      <% if (element[2]["exptype"] == "project") %>
+                         <i class="fa fa-folder-open-o" aria-hidden="true"></i> <%= element[2]["header"]%>    
+                      <% end %>
+
+                    <p class = "skillsCard_Info"><%= element[2]["experienceinfo"] %></p>
+                <% end %>
+                <% if (element[3]["exptype"] != "") %>
+                      <% if (element[3]["exptype"] == "work") %>
+                      <i class="fa fa-building-o" aria-hidden="true"></i> <%= element[3]["header"]%>   
+                      <% end %>
+
+                      <% if (element[3]["exptype"] == "project") %>
+                        <i class="fa fa-folder-open-o" aria-hidden="true"></i> <%= element[3]["header"]%>    
+                      <% end %>
+
+                    <p class = "skillsCard_Info"> <%= element[3]["experienceinfo"] %> </p>
+                <% end %> 
+        </div>
+      </div>
+<% end %>

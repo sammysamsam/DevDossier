@@ -1,144 +1,237 @@
-
-var FElist = ["", "Angular.js","Ember.js", "React.js","Knockout.js","Aurelia.js","Vue.js","Polymer.js","WordPress","JQuery"]
-var BElist = ["", "Node.js","SQL","MongoDB","C#"]
-var FSlist = ["", "Ruby On Rails","MEAN","LAMP","Python"]
-
-var UpdateSkillsREACT = React.createClass({
+var EditSkillsREACT = React.createClass({
 	getInitialState: function() {
-		console.log(this.props)
+		var skills = [];
+		if(this.props.profile.skills != null && this.props.profile.skills != "")
+			skills = JSON.parse(this.props.profile.skills);
 
 		return {
-			project: this.props.profile,
-
-			skills: this.props.profile.skills||[],
-			skillsInput:["",{school:false,self:false,educationinfo:""},
-
-							// exptype: false = project true = work
-							
-							{exptype:false,link:"",experienceinfo:""},
-							{exptype:false,link:"",experienceinfo:""}],
-			skillsSelect:0,
+			skills: skills,
+			selected_Skill_Index:-1,
 		}
 	},
 
 //
 	updateSkillSelect: function(e_){
-		this.setState({skillsSelect:e_})		
+		this.setState({selected_Skill_Index:e_})		
 	},
 
-	updateSkillsInput0: function(e_){			//type (frontend, backend, fullstack)
-		var s = this.state.skillsInput;
-		s[0] = e_.target.value;
-		this.setState({skillsInput:s})		
-	},	
-	updateSkillsInput1: function(e_){			//education
-		var s = this.state.skillsInput;
-		s[1] = e_.target.value;
-		this.setState({skillsInput:skills})		
+//	
+
+	update_Skill_education: function(e_){			//education
+		var index = this.state.selected_Skill_Index;
+		var s = this.state.skills;
+		s[index][1].educationinfo = e_.target.value;
+		this.setState({skills:s})		
 	},
-	toggleEducation: function(number){			//checkbox education
-		var s = this.state.skillsInput;
+
+	update_Education_Type: function(number){			//checkbox education
+		var index = this.state.selected_Skill_Index;
+		var s = this.state.skills;
+
 		if(number == 0)
-			s[1].school = !s[1].school;
+		{
+			s[index][1].school = !s[index][1].school;
+		}
 		if(number == 1)
-			s[1].school = !s[1].self;	
+		{
+			s[index][1].self = !s[index][1].self;
+		}
 
+		this.setState({skills:s})	
+	},
+
+//
+
+
+	update_Workexp_Info1: function(e_){			//projects/repos/work exp 1
+		var index = this.state.selected_Skill_Index;
+		var s = this.state.skills;
+		s[index][2].experienceinfo = e_.target.value;
+
+		this.setState({skills:s})		
+	},
+	update_Workexp_Header1: function(e_){			//projects/repos/work exp header
+		var index = this.state.selected_Skill_Index;
+		var s = this.state.skills;
+		
+		s[index][2].header = e_.target.value;
+		this.setState({skills:s})		
+	},
+	toggle_WorkExp_Type1: function(e_){			//radio experience
+		var index = this.state.selected_Skill_Index;
+		var s = this.state.skills;
+		
+		s[index][2].exptype = e_
 		this.setState({skillsInput:s})	
 	},
 
-	updateSkillsInput2: function(e_){			//projects/repos/work exp
-		var skills = this.state.skills;
-		this.setState({skills:skills})		
+//
+
+
+	update_Workexp_Info2: function(e_){			//projects/repos/work exp 2
+		var index = this.state.selected_Skill_Index;
+		var s = this.state.skills;
+
+		s[index][3].experienceinfo = e_.target.value;
+		this.setState({skills:s})		
 	},
+	update_Workexp_Header2: function(e_){			//projects/repos/work exp header
+		var index = this.state.selected_Skill_Index;
+		var s = this.state.skills;
 
-	updateSkillsInput3: function(e_){			//projects/repos/work exp
-		var skills = this.state.skills;
-		this.setState({skills:skills})		
+		s[index][3].header = e_.target.value;
+		this.setState({skills:s})			
 	},
-
-
-	toggleWorkExperience: function(number){			//radio experience
-		var s = this.state.skillsInput;
-		if(number == 0)
-			s[2].proj = !s[2].exptype;
-		if(number == 1)
-			s[3].school = !s[3].exptype;	
-
+	toggle_WorkExp_Type2: function(e_){			//radio experience
+		var index = this.state.selected_Skill_Index;
+		var s = this.state.skills;
+		s[index][3].exptype = e_
 		this.setState({skillsInput:s})	
 	},
 
 
 //
-	selectSkill: function(e_){
-		var skill = this.state.skills;
-		skill.push([e_.target.value,"","",""]);
-		this.setState({skills:skill});
+
+
+	deleteSkill: function(){
+		skills = this.state.skills;
+		skills.splice(this.state.selected_Skill_Index,1);
+		this.setState({skills:skills, selected_Skill_Index:this.state.selected_Skill_Index-1})				
 	},
 
-	deleteSkill: function(nothing,index){
+	submit: function (){
+		var result = JSON.stringify(this.state.skills);
 
-	},
-
-
-//
-
-
-	renderUpdatedLists: function(){
-		var list=FElist;
-		if(this.state.skillsSelect == 1)
-			list=BElist;
-		if(this.state.skillsSelect == 2)
-			list=FSlist;
-		x = this;
-
-		for(var i =0; i<this.state.skills.length; i++){
-			for(var y = 0;y<list.length;y++){
-				var index = list[y].indexOf(this.state.skills[i][0]);
-				if (index != -1){
-					list[i].splice(index,1);
-					break;
+		var link = Routes.edit_skill_profile_path(this.props.profile.id,
+			{profile: 
+				{ 
+				public_name: this.props.profile.public_name,
+				skills:result, 
 				}
 			}
-		}
-		return (
-			<select onChange = {x.updateSkillsInput0} className = "u-full-width">
-					{list.sort().map(function(listValue,index){
-						if(index != 0)
-							return(<option key = {index} value={listValue}> {listValue} </option>)
-						else
-							return (<option selected key = {index} value={listValue}> {listValue} </option>)
-					})}	
-     		</select>
+		)
+		window.location = link
+	},
+
+//
+
+	renderSkillsList: function(){
+			var list = [];
+			var tis = this;
+			for(var i =0;i<this.state.skills.length;i++){
+				list.push( this.state.skills[i][0])
+			}
+
+			displaySkillsListStyle = {
+				height:"100%",
+				width:"100%",
+				padding:"50px",
+			}
+			dsl_itemStyle = {
+				display:"inline-block",
+				margin:"15px 10px ",
+				backgroundColor:"#ff7043 ",
+				padding:"10px 30px 10px 30px",
+				borderRadius:"5px"
+			}
+			dsl_item_selected_Style = {
+				display:"inline-block",
+				margin:"15px 10px ",
+				backgroundColor:"grey",
+				padding:"10px 30px 10px 30px",
+			}
+			return(
+			<div style = {displaySkillsListStyle}>
+						{list.map(function(listValue,index){
+				   		if(tis.state.selected_Skill_Index == index)
+				   			return(							
+					   			<div key = {index} style = {dsl_item_selected_Style}>
+									{listValue}
+								</div>)
+ 							else
+					   		return(
+								<div key = {index} style = {dsl_itemStyle} onClick = {() => {tis.updateSkillSelect(index)}}>
+									{listValue}
+								</div>
+							)
+				    	})}
+			</div>
 			)
 	},
 
-	renderWorkExperience: function(){
+	renderEditWorkExperience: function(){
+		var info = this.state.skills[this.state.selected_Skill_Index];
 		return (
 		<div>		
+
+		<h6>Knowledge Base: </h6>
+
+			<div style = {{display:"inline-block",marginLeft:"10px"}}> 
+
+				University / Bootcamp 
+				<input type="checkbox" onChange = {this.update_Education_Type.bind(null,0)} checked = {info[1].school}/> 
+
+			</div>
+    		<div style = {{display:"inline-block",marginLeft:"10px"}}> 
+
+	    		Self-Taught 
+	    		<input type="checkbox"  onChange = {this.update_Education_Type.bind(null,1)} checked = {info[1].self}/>
+
+    		</div>
+			<textarea maxLength="250" onChange = {this.update_Skill_education} className = "u-full-width" value={info[1].educationinfo}></textarea>
+
+		<h6>Work/Project Experience: </h6>
+
 			<div className = "row">
-				<div className = "nine columns">
-  					<input onChange = {this.updateLastName} className = "u-full-width"  placeholder={this.state.lastname} id="last_name_input"/>
-				</div>
-				<div className = "three columns">
-					Work <input type="radio" name = "work1" value={0} />
-					Project <input type="radio"name = "work1"  value={1} />
+			
+				<div className = "eight columns">
+  					<input maxLength = "50"  onChange = {this.update_Workexp_Header1} className = "u-full-width"  value={info[2].header}/>				
+  				</div>
+				
+				<div className = "four columns">
+
+					<div style = {{display:"inline",marginLeft:"7px"}}> 
+					
+						Work 
+						<input type="radio" name = "work1" onChange = {this.toggle_WorkExp_Type1.bind(null,"work")} checked = {info[2].exptype =="work"} /> 
+					</div>
+
+					<div style = {{display:"inline",marginLeft:"7px"}}> 
+
+						Project 
+						<input type="radio" name = "work1" onChange = {this.toggle_WorkExp_Type1.bind(null,"project")} checked = {info[2].exptype =="project"} /> 
+
+					</div>
+
 				</div>
 			</div>
 				
-			<textarea maxLength="250" onChange = {this.updateSkillsInput2} className = "u-full-width" placeholder="Describe your role and what you did (250 character limit)"></textarea>
+			<textarea maxLength="200" onChange = {this.update_Workexp_Info1} className = "u-full-width" value={info[2].experienceinfo}></textarea>
       			
 			<div className = "row">
-				<div className = "nine columns">
-  					<input onChange = {this.updateLastName} className = "u-full-width"  placeholder={this.state.lastname} id="last_name_input"/>
-				</div>
-				<div className = "three columns">
-					Work <input type="radio" name = "work1" value={0} />
-					Project <input type="radio"name = "work1"  value={1} />
+
+				<div className = "eight columns">
+  					<input maxLength = "50"  onChange = {this.update_Workexp_Header2} className = "u-full-width"  value={info[3].header}/>	
+
+  				</div>
+				<div className = "four columns">
+					<div style = {{display:"inline",marginLeft:"7px"}}> 
+					
+						Work 
+						<input type="radio" name = "work2" onChange = {this.toggle_WorkExp_Type2.bind(null,"work")} checked = {info[3].exptype == "work"} /> 
+					</div>
+
+					<div style = {{display:"inline",marginLeft:"7px"}}> 
+
+						Project 
+						<input type="radio" name = "work2" onChange = {this.toggle_WorkExp_Type2.bind(null,"project")} checked = {info[3].exptype== "project"} /> 
+
+					</div>	
 				</div>
 			</div>
 			
-			<textarea maxLength="250" onChange = {this.updateSkillsInput3} className = "u-full-width" placeholder="Describe your role and what you did (250 character limit)"></textarea>
-
+			<textarea maxLength="200" onChange = {this.update_Workexp_Info2} className = "u-full-width" value ={info[3].experienceinfo}></textarea>
+			<button onClick = {() => {this.deleteSkill()}}> delete </button>
 		</div>
 			)
 	},
@@ -146,30 +239,33 @@ var UpdateSkillsREACT = React.createClass({
 
 	render: function () {
 		var x = this;
-		return (
+		if(this.state.selected_Skill_Index == -1)
+			return(
 			<div>
-				<div className = "container">
-					<div id = "skillSelector">
-					    <div className = "skillSelectorItem" onClick = {() => {this.updateSkillSelect(0)}}> Front-End </div>
-					    <div className = "skillSelectorItem" onClick = {() =>{this.updateSkillSelect(1)}}> Back-End</div>
-					    <div className = "skillSelectorItem" onClick = {() =>{this.updateSkillSelect(2)}}> Full-Stack </div>
+					<div className = "container">	
+						<div className  = "row">			
+							{this.renderSkillsList()}
+						</div>
+		
+	
+						<button className = "btn-primary"  onClick = {this.props.toggle} > close ( lose unsaved data ) </button>					&nbsp;
+
+						<button className = "button-primary"  onClick = {this.submit}> save </button>
+					</div>
+			</div>) 
+		else
+			return (
+					<div className = "container">	
+								{this.renderSkillsList()}	
+								{this.renderEditWorkExperience()}		
+
+								<button className = "btn-primary" onClick = {this.submit}> save </button>
+													<div></div>
+								<button className = "btn-primary" onClick = {this.props.toggle} > close ( lose unsaved data ) </button>
+			
 					</div>
 
-					{this.renderUpdatedLists()}	
-
-					<h6>Knowledge Base: </h6>
-
-					<div style = {{display:"inline-block",marginLeft:"10px"}}> University / Bootcamp <input type="checkbox" value={0} /> </div>
-		    		<div style = {{display:"inline-block",marginLeft:"10px"}}> Self-Taught <input type="checkbox"  value={1} /></div>
-					<textarea maxLength="250" onChange = {this.updateSkillsInput1} className = "u-full-width" placeholder="Describe/list the courses, books and tutorials you've used to learn this skill (250 character limit)"></textarea>
-					
-
-					<h6>Work/Project Experience: </h6>
-
-					{this.renderWorkExperience()}				
-				</div>
-			</div>
-		)
+			)
 	}
 });
 

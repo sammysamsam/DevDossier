@@ -3,7 +3,9 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-
+#generalInfoSection{
+	padding:60px 15px 60px 15px;
+}
 .aboutMeSection{
 	font-size:15px;
 	padding-bottom: 10px;
@@ -29,9 +31,24 @@
 	font-size:12px;
 }
 
+.edit_addSkillsButtonContainer
+{
+	margin-top:20px;
+}
+.edit_addSkillsButton{
+	font-weight:bold;
+	font-size: 11px;
+	color:#bf360c ;
+	width:100%;
+}
+.edit_addSkillsButton:hover{
+	background-color: #009688 ;
+}
+
+		/* **** */
 
 .newSkillsContainer{
-
+	margin-top:50px;
 }
 .skillsSelectorItem{
 	display:inline-block;
@@ -41,4 +58,34 @@
 }
 .skillsTextBox{
 	max-height:500px;
+}
+
+
+		/* **** */
+
+
+.skillsCard_Container{
+	/*background-color: #f4f4f4; */
+	padding:25px;
+	border-radius:10px;
+}
+.skillsCard_Section{
+padding-top:30px;
+}
+.skillsCard_Info{
+font-size:13px;
+}
+
+.skillsCard_Heading{
+	font-size:10px;
+	color:#e5b17e;
+	height:30px;
+}
+.skillsCard_Title{
+	font-weight: thin;
+	font-size:14px;
+	margin-top:-30px;
+	padding-top:10px;
+	height:50px;
+
 }

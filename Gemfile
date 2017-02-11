@@ -35,7 +35,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise'
 gem 'react-rails'
 gem "js-routes"
-
+gem 'json'
+gem 'chart-js-rails'
 gem 'skeleton-rails', :git => 'https://github.com/helios-technologies/skeleton-rails'
 gem "font-awesome-rails"
 # Use Capistrano for deployment

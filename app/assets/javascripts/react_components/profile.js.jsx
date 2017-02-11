@@ -3,14 +3,12 @@ var ProfileREACT = React.createClass({
 
 
 	getInitialState: function() {
-
-		let education = {educationinfo:[]};
+	console.log(this.props.profile.skills)
+		let education = [];
 		
 		if(this.props.profile.education != null)
 			education = JSON.parse(this.props.profile.education);
 
-		console.log("PROFILE");
-		console.log(this.props)
 		return {
 			editingSTATE: false,
 			firstname:this.props.profile.first_name||"",
@@ -30,7 +28,7 @@ var ProfileREACT = React.createClass({
 //
 
 	renderEducationCourses: function(){
-		var education = this.state.education.educationinfo
+		var education = this.state.education
 		var courses = this.state.courses;
 
 		var style1 = {};
@@ -45,11 +43,16 @@ var ProfileREACT = React.createClass({
 				<div className = "educationSection" style = {style1}>
 					<i className="fa fa-university"></i> &nbsp;
 						{education.map(function(listValue,index){
-							return(
-							<span  key = {index} className = "educationItem">
-								{listValue[0]} <span className = "educationCaption">{listValue[1]+ " "+ listValue[2]}</span>
-							</span>
-							)
+							var space = ""
+							if(index > 0){
+								space = " , "
+							}
+								return(
+								<span  key = {index} className = "educationItem">
+									{space+listValue[0]} <span className = "educationCaption">{listValue[1]+ " "+ listValue[2]}</span>
+								</span>
+								)
+
 						})}	
 
 				</div>
@@ -92,24 +95,25 @@ var ProfileREACT = React.createClass({
 		return (
 			<div>
 				<div className = "container">
-					<div className = "row generalInfoSection" >
-						<div className = "two columns">&nbsp; </div>
-						<div className = "nine columns">
+					<div id = "generalInfoSection">
+						<div className = "row">
+							<div className = "two columns">&nbsp; </div>
+							<div className = "nine columns">
 
-							<h4 style = {{display:"inline"}}> {this.state.firstname + " " + this.state.lastname} </h4>  
-							<p style = {{display:"inline"}}> <i className="fa fa-street-view"></i> {this.state.location}</p>   	
-							
-							<h6>
-								{this.state.aboutme}
-							</h6>	
+								<h4 style = {{display:"inline"}}> {this.state.firstname + " " + this.state.lastname} </h4>  
+								<p style = {{display:"inline"}}> <i className="fa fa-street-view"></i> {this.state.location}</p>   	
+								<h6 style = {{margin:"20px 0px 5px 0px"}}>
+									{this.state.aboutme}
+								</h6>	
 
-							{this.renderEducationCourses()}
+								{this.renderEducationCourses()}
+							</div>
+							<div className = "one column"> {this.renderEditButton()} </div>		
 						</div>
-						<div className = "one column"> {this.renderEditButton()} </div>		
+
+
 					</div>
-
 				</div>
-
 				{this.renderEditable()}
 			</div>
 		)
