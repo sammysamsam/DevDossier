@@ -1,5 +1,4 @@
 
-<hr/>
 <% puts "\n\n\n\n\n" + @profile.skills %>
 <% if(@profile.skills != nil && @profile.skills != "") %>
 <% skillslist = JSON.parse(@profile.skills)  %>
@@ -17,12 +16,12 @@
             
             <% if (element[1]["self"] || element[1]["school"]) %>
                 <% if (element[1]["self"]) %>
-                    <span>Self-Taught </span>
+                    <span class = "value">Self-Taught </span>
                     <i style = "color:green" class="fa fa-check-square-o" aria-hidden="true"></i>
                     <br/>
                  <%end%>
                 <% if (element[1]["school"]) %>
-                    <span>Courses Taken </span>
+                    <span class = "skillsCard_edItem">Courses Taken </span>
                     <i style = "color:green" class="fa fa-check-square-o" aria-hidden="true"></i>
                                    <br/>   
                 <%end%>
@@ -57,7 +56,8 @@
                     <p class = "skillsCard_Info"> <%= element[3]["experienceinfo"] %> </p>
                 <% end %> 
         </div>
+
       </div>
-     <hr/>
+      <hr class = "skillsCard_hr"/> 
 <% end %>
 <% end %>

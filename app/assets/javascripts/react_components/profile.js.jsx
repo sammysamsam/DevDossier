@@ -98,20 +98,28 @@ var ProfileREACT = React.createClass({
 					<div id = "generalInfoSection">
 						<div className = "row">
 							<div className = "two columns">&nbsp; </div>
-							<div className = "nine columns">
+							<div className = "eight columns">
 
-								<h4 style = {{display:"inline"}}> {this.state.firstname + " " + this.state.lastname} </h4>  
-								<p style = {{display:"inline"}}> <i className="fa fa-street-view"></i> {this.state.location}</p>   	
-								<h6 style = {{margin:"20px 0px 5px 0px"}}>
+								<h4 style = {{display:"inline"}}> 
+									{this.state.firstname + " " + this.state.lastname} 
+								</h4>  
+
+								<p style = {{display:"inline",paddingLeft:"10px"}}> 
+									<i className="fa fa-street-view"></i> {this.state.location}
+								</p>  
+
+								<h6 style = {{margin:"20spx 0px 5px 0px"}}>
 									{this.state.aboutme}
 								</h6>	
 
 								{this.renderEducationCourses()}
+								
 							</div>
-							<div className = "one column"> {this.renderEditButton()} </div>		
+							<div style = {{float:"right"}}> 
+								{this.renderEditButton()} 
+							</div>		
+
 						</div>
-
-
 					</div>
 				</div>
 				{this.renderEditable()}

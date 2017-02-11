@@ -2,28 +2,33 @@
 <html>
   <head>
     <title>Devos</title>
-   <link href="https://fonts.googleapis.com/css?family=Roboto|Rubik" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Poppins|Roboto" rel="stylesheet">
   </head>
 
   <body>
-		<%= link_to "Homepage", root_path, method: :get %> 
-  	  	Logged In As: <%= @currentfullname%>
-  		<div style = "float:right">
 
 
-	  		<%= link_to "Advanced Settings", edit_user_registration_path %>	
-	  		<%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
-	  	</div>
 
-	  	<%= react_component('ProfileREACT', {:profile => @profile,:editable => @editable}) %>
-			
-		<div class = "container">
+  		<div id = "navbar">
+			<%= link_to root_path, {method: :get, :class => "home_navbar" } do %> 
+				<i class="fa fa-globe" aria-hidden="true"></i>
+			<% end %>
+		  	<span style = "font-size:10px;"> Logged In As: <%= @currentfullname%> </span>
+		<div style = "float:right;margin-right:10px;">
+	  		<%= link_to "Advanced Settings", edit_user_registration_path, {:class => "item_navbar"} %>	
+	  		<%= link_to "Sign Out", destroy_user_session_path, {method: :delete, :class => "item_navbar" }%>
+	   	</div>
+
+  		</div>
 		
-		<%= render partial: "display_skills", locals: {:profile => @profile} %>
+ 		<%= react_component('ProfileREACT', {:profile => @profile,:editable => @editable}) %>
+			
+		<div class = "container" style = "background-color: #fbe9e7;padding:20px;">
+			
+				<%= render partial: "display_skills", locals: {:profile => @profile} %>
+				
+				<%= react_component('UpdateSkillsREACT', {:profile => @profile, :editable => @editable}, :currState => @opened_page) %> 
 
-	 	 <%= react_component('UpdateSkillsREACT', {:profile => @profile, :editable => @editable}, :currState => @opened_page) %> 
-
-	 	 
 		</div>
 
   </body>

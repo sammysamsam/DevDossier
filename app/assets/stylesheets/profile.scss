@@ -2,6 +2,39 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+#navbar{
+	padding:10px 0px 10px 0px;
+	width:100vw;
+	background-color:#ffab91 ;
+}
+.home_navbar{
+	text-decoration:none;
+	cursor:pointer;
+	font-size:18px;
+	color:#424242;
+	font-weight:bold;
+	margin-left:15px;
+
+}
+.home_navbar:hover{
+	color:#bf360c;
+}
+.item_navbar{
+	text-decoration:none;
+	cursor:pointer;
+	font-size:10px;
+	color:#424242;
+	font-weight:bold;
+	margin-left:15px;	
+	padding:8px;
+	border: .5px solid #ffccbc;
+}
+.item_navbar:hover{
+	color:#bf360c;	
+}
+
+
+
 
 #generalInfoSection{
 	padding:60px 15px 60px 15px;
@@ -84,11 +117,15 @@ textarea{
 	padding:25px;
 	border-radius:10px;
 }
+
 .skillsCard_Section{
 	padding-top:30px;
 }
+
 .skillsCard_Info{
 font-size:13px;
+margin-top:10px;
+
 }
 
 .skillsCard_Heading{
@@ -96,12 +133,26 @@ font-size:13px;
 	color:#e5b17e;
 	height:30px;
 }
+
 .skillsCard_Title{
 	font-weight: bold;
 	font-size:16px;
 	margin-top:-30px;
-	font-family: 'Roboto','Raleway';
+	font-family: 'Poppins','Raleway';
 	padding-top:10px;
 	height:50px;
 
 }
+.skillsCard_edItem{
+	font-family: 'Roboto','Raleway';	
+color:grey;
+}
+.skillsCard_hr{
+	color:black;;
+	border-color:black;
+	background-color:black;
+	width:80%;
+}
+
+
+
