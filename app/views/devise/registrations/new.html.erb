@@ -1,7 +1,14 @@
+
+<div style = "width:100vw; background-image: url('http://www.chicagodigital.com/images/content/slider/champ/champ-home-slider-bg.jpg'); background-size:100% 100%;min-width: 400px;min-height:600px;padding: 50px 0px 50px 0px;overflow:auto;height:100vh;">
+
+<div style = "border-radius:10px;padding:50px;margin:auto;background-color: white;width:300px;">
+
+
 <h2>Sign up</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+
+  <p><%= devise_error_messages! %></p>
 
   <div class="field">
     <%= f.label :email %><br />
@@ -27,3 +34,5 @@
 <% end %>
 
 <%= render "devise/shared/links" %>
+</div>
+</div>

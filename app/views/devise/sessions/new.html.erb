@@ -1,4 +1,7 @@
-<div class = 'container' style = "padding-top: 40px;">
+<div style = "width:100vw; background-image: url('http://www.chicagodigital.com/images/content/slider/champ/champ-home-slider-bg.jpg'); min-width: 400px; min-height:600px;padding: 50px 0px 50px 0px; ">
+
+<div style = "border-radius:10px;padding:30px;margin:auto;background-color: white; width:300px;">
+
 <h2>Log in</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -25,5 +28,6 @@
 <% end %>
 
 <%= render "devise/shared/links" %>
+</div>
 
 </div>
