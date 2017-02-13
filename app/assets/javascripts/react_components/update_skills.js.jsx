@@ -34,9 +34,9 @@ var UpdateSkills= React.createClass({
 	renderEditable: function(){
 
 		if(this.props.editable && this.state.component_opened == "add")
-			return <NewSkillsREACT profile = {this.props.profile} toggle = {this.toggleCloseState}/> 
+			return <NewSkills profile = {this.props.profile} toggle = {this.toggleCloseState}/> 
 		if(this.props.editable && this.state.component_opened == "edit")
-			return	<EditSkillsREACT profile = {this.props.profile} toggle = {this.toggleCloseState}/>
+			return	<EditSkills profile = {this.props.profile} toggle = {this.toggleCloseState}/>
 		else
 			return(<div></div>)
 	},
