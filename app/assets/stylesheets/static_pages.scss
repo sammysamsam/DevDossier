@@ -9,7 +9,10 @@
 	background-image: url('http://www.chicagodigital.com/images/content/slider/champ/champ-home-slider-bg.jpg');
 	margin-top:0px;
 	min-height:600px;
+	background-repeat: no-repeat;
+	background-size:cover;
 }
+
 #landingPageLogo {
 	margin:auto; 
 	width:300px; 
