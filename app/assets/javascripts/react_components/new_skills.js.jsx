@@ -155,100 +155,89 @@ var NewSkills = React.createClass({
 		var x = this;
 		return (
 			<div className = "newSkillsContainer">
-				<div className = "container">
-
-
-					<div id = "skillSelector">
-					    <div className = "selectedSkillIndexorItem" onClick = {() => {this.updateSelectedSkillIndex(0)}}> Front-End </div>
-					    <div className = "selectedSkillIndexorItem" onClick = {() =>{this.updateSelectedSkillIndex(1)}}> Back-End</div>
-					    <div className = "selectedSkillIndexorItem" onClick = {() =>{this.updateSelectedSkillIndex(2)}}> Full-Stack </div>
-					</div>
-
-
-					<div className = "row">
-						<div className = "four columns">
-
-							{this.renderUpdatedLists()}	
-			
-
-
-							<h6>Knowledge Base: </h6>
-
-							<div style = {{display:"inline-block",marginLeft:"10px"}}> 
-								University / Bootcamp 
-		    					<input type="checkbox"  onChange = {this.toggleEducationType.bind(null,0)} checked = {this.state.skillsInput[1].school}/>
-							</div>
-
-				    		<div style = {{display:"inline-block",marginLeft:"10px"}}> 
-					    		Self-Taught 
-		    					<input type="checkbox"  onChange = {this.toggleEducationType.bind(null,1)} checked = {this.state.skillsInput[1].self}/>
-				    		</div>
-							
-							<textarea style = {{minHeight:"155px"}} maxLength="250" onChange = {this.updateEducationInfo} className = "u-full-width skillsTextBox" placeholder="Describe/list the courses, books and tutorials you've used to learn this skill (250 character limit)"></textarea>
-						</div>
-
-
-
-						<div className = "eight columns">
-
-							<h6>Work/Project Experience: </h6>
-
-							<div>		
-								<div className = "row">
-
-									<div className = "four columns">
-										<div style = {{display:"inline-block",marginLeft:"5px",width:"70px"}}> 
-											
-											Work 
-											<input type="radio" name = "work1" onClick = {this.toggledWorkExpType1.bind(null,"work")}/> 
-										</div>
-										<div style = {{display:"inline-block",marginLeft:"5px",width:"70px"}}> 
-											
-											Project 
-											<input type="radio" name = "work1" onClick = {this.toggledWorkExpType1.bind(null,"project")}/> 
-										</div>
-									</div>
-
-									<div className = "eight columns">
-					  					<input maxLength = "50" onChange = {this.updateWorkExpHeader1} className = "u-full-width"  placeholder="Project Name or Company Name (optional: url to company page or repo)"/>
-									</div>
-
-								</div>
-							
-								<textarea maxLength="200" onChange = {this.updateWorkExpInfo1} className = "u-full-width skillsTextBox" placeholder="Describe your role and what you did (200 character limit)"></textarea>
-					      			
-								<div className = "row">
-
-									<div className = "four columns">
-										<div style = {{display:"inline-block",marginLeft:"5px",width:"70px"}}>
-
-											Work 
-											<input type="radio" name = "work2" onClick = {this.toggledWorkExpType2.bind(null,"work")}/> 
-										</div>
-										<div style = {{display:"inline-block",marginLeft:"5px",width:"70px"}}>
-											
-											Project 
-											<input type="radio" name = "work2" onClick = {this.toggledWorkExpType2.bind(null,"project")}/> 
-										</div>
-									</div>
-
-									<div className = "eight columns">
-					  					<input maxLength = "50"  onChange = {this.updateWorkExpHeader2} className = "u-full-width"  placeholder="Project Name or Company Name (optional: url to company page or repo)" />
-									</div>
-
-								</div>
-								
-								<textarea maxLength="200" onChange = {this.updateWorkExpInfo2} className = "u-full-width skillsTextBox" placeholder="Describe your role and what you did (200 character limit)"></textarea>
-							</div>
-						</div>
-					</div>
-
-
-					<button onClick = {this.props.toggle}> close</button><div></div>
-
-					<button className="button-primary" onClick = {this.submitSkills}> submit </button>		
-						
+				<div id = "skillSelector">
+				    <div className = "skillSelectorItem" onClick = {() => {this.updateSelectedSkillIndex(0)}}> Front-End </div>
+				    <div className = "skillSelectorItem" onClick = {() =>{this.updateSelectedSkillIndex(1)}}> Back-End</div>
+				    <div className = "skillSelectorItem" onClick = {() =>{this.updateSelectedSkillIndex(2)}}> Full-Stack </div>
 				</div>
+
+				<div className = "row">
+					<div className = "four columns">
+
+						{this.renderUpdatedLists()}	
+		
+						<h6>Knowledge Base: </h6>
+
+						<div style = {{display:"inline-block",marginLeft:"10px"}}> 
+							University / Bootcamp  &nbsp;
+	    					<input type="checkbox"  onChange = {this.toggleEducationType.bind(null,0)} checked = {this.state.skillsInput[1].school}/>
+						</div>
+
+			    		<div style = {{display:"inline-block",marginLeft:"10px"}}> 
+				    		Self-Taught  &nbsp;
+	    					<input type="checkbox"  onChange = {this.toggleEducationType.bind(null,1)} checked = {this.state.skillsInput[1].self}/>
+			    		</div>
+						
+						<textarea style = {{minHeight:"155px"}} maxLength="250" onChange = {this.updateEducationInfo} className = "u-full-width skillsTextBox" placeholder="Describe/list the courses, books and tutorials you've used to learn this skill (250 character limit)"></textarea>
+					</div>
+
+					<div className = "eight columns">
+
+						<h6>Work/Project Experience: </h6>
+
+						<div>		
+							<div className = "row">
+
+								<div className = "four columns">
+									<div style = {{display:"inline-block",marginLeft:"5px",width:"70px"}}> 
+										
+										Work  &nbsp;
+										<input type="radio" name = "work1" onClick = {this.toggledWorkExpType1.bind(null,"work")}/> 
+									</div>
+									<div style = {{display:"inline-block",marginLeft:"5px",width:"70px"}}> 
+										
+										Project  &nbsp;
+										<input type="radio" name = "work1" onClick = {this.toggledWorkExpType1.bind(null,"project")}/> 
+									</div>
+								</div>
+
+								<div className = "eight columns">
+				  					<input maxLength = "50" onChange = {this.updateWorkExpHeader1} className = "u-full-width"  placeholder="Project Name or Company Name (optional: url to company page or repo)"/>
+								</div>
+
+							</div>
+						
+							<textarea maxLength="200" onChange = {this.updateWorkExpInfo1} className = "u-full-width skillsTextBox" placeholder="Describe your role and what you did (200 character limit)"></textarea>
+				      			
+							<div className = "row">
+
+								<div className = "four columns">
+									<div style = {{display:"inline-block",marginLeft:"5px",width:"70px"}}>
+
+										Work  &nbsp;
+										<input type="radio" name = "work2" onClick = {this.toggledWorkExpType2.bind(null,"work")}/> 
+									</div>
+									<div style = {{display:"inline-block",marginLeft:"5px",width:"70px"}}>
+										
+										Project  &nbsp;
+										<input type="radio" name = "work2" onClick = {this.toggledWorkExpType2.bind(null,"project")}/> 
+									</div>
+								</div>
+
+								<div className = "eight columns">
+				  					<input maxLength = "50"  onChange = {this.updateWorkExpHeader2} className = "u-full-width"  placeholder="Project Name or Company Name (optional: url to company page or repo)" />
+								</div>
+
+							</div>
+							
+							<textarea maxLength="200" onChange = {this.updateWorkExpInfo2} className = "u-full-width skillsTextBox" placeholder="Describe your role and what you did (200 character limit)"></textarea>
+						</div>
+					</div>
+				</div>
+
+
+				<button onClick = {this.props.toggle}> close</button><div></div>
+				<button className="button-primary" onClick = {this.submitSkills}> submit </button>		
 			</div>
 		)
 	}

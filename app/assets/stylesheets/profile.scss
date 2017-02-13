@@ -7,7 +7,9 @@ h2{
 textarea{
 	resize:vertical;
 }
-
+input {
+	padding:4px 6px 4px 6px
+}
 
 #navbar{
 	padding:10px 0px 10px 0px;
@@ -96,15 +98,22 @@ textarea{
 
 
 
+
+.editSkillsContainer{
+	margin-top:30px;
+	background-color:#fcf9f7;
+	padding:0px 50px 30px 50px;
+}
 .edit_addSkillsButtonContainer
 {
 	margin-top:20px;
+	text-align:center;
 }
+
 .edit_addSkillsButton{
 	font-weight:bold;
 	font-size: 11px;
-	color:#bf360c ;
-	width:100%;
+	color:#bf360c;
 }
 .edit_addSkillsButton:hover{
 	background-color: #009688 ;
@@ -114,21 +123,46 @@ textarea{
 
 .newSkillsContainer{
 	margin-top:50px;
+	background-color:#fcfcfc;
+	padding:20px;
 }
-.skillsSelectorItem{
+
+#skillSelector{
+	
+}
+.skillSelectorItem{
 	display:inline-block;
 	text-align: center;
 	height:50px;
 	width:33%;
 }
 
-
+.skillsListStyle{
+	height:100%;
+	padding:50px;
+	text-align:center;
+}
+.skillsList_itemStyle{
+	display:inline-block;
+	margin:15px 10px;
+	background-color:#ffc096;
+	padding:10px 30px 10px 30px;
+	border-radius:5px;
+	cursor:pointer;
+}
+.skillsList_item_selected_Style{
+	display:inline-block;
+	margin:15px 10px ;
+	background-color:#fc8671;
+	padding:10px 30px 10px 30px;
+	border-radius:5px;
+}
 
 		/* **** */
 
 
 .skillsCard_Container{
-	/*background-color: #f4f4f4; */
+	/*background-color: #fcfcfc; */
 	padding:25px;
 	border-radius:10px;
 	font-family: 'Roboto','Raleway';

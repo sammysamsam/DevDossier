@@ -121,35 +121,17 @@ var EditSkills= React.createClass({
 			for(var i =0;i<this.state.skills.length;i++) {
 				list.push( this.state.skills[i][0])
 			}
-
-			displaySkillsListStyle = {
-				height:"100%",
-				padding:"50px",
-			}
-			dsl_itemStyle = {
-				display:"inline-block",
-				margin:"15px 10px ",
-				backgroundColor:"#ff7043 ",
-				padding:"10px 30px 10px 30px",
-				borderRadius:"5px"
-			}
-			dsl_item_selected_Style = {
-				display:"inline-block",
-				margin:"15px 10px ",
-				backgroundColor:"grey",
-				padding:"10px 30px 10px 30px",
-			}
 			return(
-			<div style = {displaySkillsListStyle}>
+			<div className = "skillsListStyle">
 				{list.map(function(listValue,index) {
 		   		if(tis.state.selected_Skill_Index == index)
 		   			return(							
-			   			<div key = {index} style = {dsl_item_selected_Style}>
+			   			<div key = {index} className = "skillsList_item_selected_Style">
 							{listValue}
 						</div>)
 						else
 			   		return(
-						<div key = {index} style = {dsl_itemStyle} onClick = {() => {tis.updateSkillSelect(index)}}>
+						<div key = {index} className = "skillsList_itemStyle" onClick = {() => {tis.updateSkillSelect(index)}}>
 							{listValue}
 						</div>
 					)
@@ -163,51 +145,54 @@ var EditSkills= React.createClass({
 		return (
 		<div>		
 
-		<h6>Knowledge Base: </h6>
+			<h6>Knowledge Base: </h6>
 
 			<div style = {{display:"inline-block",marginLeft:"10px"}}> 
 
-				University / Bootcamp 
-				<input type="checkbox" onChange = {this.updateEducationType.bind(null,0)} checked = {info[1].school}/> 
+					University / Bootcamp 
+					&nbsp; 
+					<input type="checkbox" onChange = {this.updateEducationType.bind(null,0)} checked = {info[1].school}/> 
 
 			</div>
-    		<div style = {{display:"inline-block",marginLeft:"10px"}}> 
+	    	<div style = {{display:"inline-block",marginLeft:"10px"}}> 
 
-	    		Self-Taught 
-	    		<input type="checkbox"  onChange = {this.updateEducationType.bind(null,1)} checked = {info[1].self}/>
+		    		Self-Taught  &nbsp;
 
-    		</div>
+		    		<input type="checkbox"  onChange = {this.updateEducationType.bind(null,1)} checked = {info[1].self}/>
+
+	    	</div>
+			
 			<textarea maxLength="250" onChange = {this.updateEducation} className = "u-full-width" value={info[1].educationinfo}></textarea>
 
-		<h6>Work/Project Experience: </h6>
+			<h6>Work/Project Experience: </h6>
 
 			<div className = "row">
-			
-				<div className = "eight columns">
-  					<input maxLength = "50"  onChange = {this.updateWorkExpHeader1} className = "u-full-width"  value={info[2].header}/>
-  				</div>
 				
+				<div className = "eight columns">
+	  				<input maxLength = "50"  onChange = {this.updateWorkExpHeader1} className = "u-full-width"  value={info[2].header}/>
+	  			</div>
+					
 				<div className = "four columns">
 
 					<div style = {{display:"inline",marginLeft:"7px"}}> 
 					
-						Work 
+						Work  &nbsp;
 						<input type="radio" name = "work1" onChange = {this.toggleWorkExpType1.bind(null,"work")} checked = {info[2].exptype =="work"} /> 
 						
 					</div>
 
 					<div style = {{display:"inline",marginLeft:"7px"}}> 
 
-						Project 
+						Project  &nbsp;
 						<input type="radio" name = "work1" onChange = {this.toggleWorkExpType1.bind(null,"project")} checked = {info[2].exptype =="project"} /> 
 
 					</div>
 
 				</div>
 			</div>
-				
+					
 			<textarea maxLength="200" onChange = {this.updateWorkExpInfo1} className = "u-full-width" value={info[2].experienceinfo}></textarea>
-      			
+	      			
 			<div className = "row">
 
 				<div className = "eight columns">
@@ -217,14 +202,14 @@ var EditSkills= React.createClass({
 				<div className = "four columns">
 					<div style = {{display:"inline",marginLeft:"7px"}}> 
 					
-						Work 
+						Work  &nbsp;
 						<input type="radio" name = "work2" onChange = {this.toggleWorkExpType2.bind(null,"work")} checked = {info[3].exptype == "work"} /> 
 
 					</div>
 
 					<div style = {{display:"inline",marginLeft:"7px"}}> 
 
-						Project 
+						Project  &nbsp;
 						<input type="radio" name = "work2" onChange = {this.toggleWorkExpType2.bind(null,"project")} checked = {info[3].exptype== "project"} /> 
 
 					</div>	
@@ -232,7 +217,6 @@ var EditSkills= React.createClass({
 			</div>
 			
 			<textarea maxLength="200" onChange = {this.updateWorkExpInfo2} className = "u-full-width" value ={info[3].experienceinfo}></textarea>
-			<button onClick = {() => {this.deleteSkill()}}> delete </button>
 		</div>
 			)
 	},
@@ -242,33 +226,31 @@ var EditSkills= React.createClass({
 		var x = this;
 		if(this.state.selected_Skill_Index == -1)
 			return(
-			<div>
-					<div className = "container">	
-						<div className  = "row">			
-							{this.renderSkillsList()}
-						</div>
-		
-						<button className = "btn-primary"  onClick = {this.props.toggle} > 
-							close ( lose unsaved data ) 
-						</button>
-						&nbsp;
-						<button className = "button-primary"  onClick = {this.submit}> 
-							save
-						</button>
-					</div>
+			<div className = "editSkillsContainer">
+				<div className  = "row" >			
+					{this.renderSkillsList()}
+				</div>
+
+				<button className = "btn-primary"  onClick = {this.props.toggle} > 
+					close ( lose unsaved data ) 
+				</button>
+				&nbsp;
+				<button className = "button-primary"  onClick = {this.submit}> 
+					save
+				</button>
 			</div>) 
 		else
 			return (
-					<div className = "container">	
-								{this.renderSkillsList()}	
-								{this.renderEditWorkExperience()}		
-
-								<button className = "btn-primary" onClick = {this.submit}> save </button>
-													<div></div>
-								<button className = "btn-primary" onClick = {this.props.toggle} > close ( lose unsaved data ) </button>
-			
-					</div>
-
+				<div className = "editSkillsContainer">	
+					{this.renderSkillsList()}	
+					{this.renderEditWorkExperience()}		
+					
+					<button onClick = {() => {this.deleteSkill()}}> delete </button>
+						&nbsp;						
+					<button className = "btn-primary" onClick = {this.submit}> save </button>
+						&nbsp;			
+					<button className = "btn-primary" onClick = {this.props.toggle} > close ( lose unsaved data ) </button>
+				</div>
 			)
 	}
 });

@@ -45,36 +45,33 @@ var UpdateSkills= React.createClass({
 		if( this.props.editable && this.state.component_opened == 'add')
 			return (
 			<div className = "row edit_addSkillsButtonContainer ">
-				<div className = "five columns"> &emsp;</div>
-
-				<div className = "three columns">
-					<button className = "edit_addSkillsButton " onClick = {this.toggleEditState}> TO GO EDIT SKILLS</button>
-				</div>
+					<button className = "edit_addSkillsButton " onClick = {this.toggleEditState}> 
+					TO GO EDIT SKILLS
+					</button>
 			</div>
 			)
 
 		if( this.props.editable && this.state.component_opened == 'edit')
 			return (
-			<div className = "row edit_addSkillsButtonContainer ">
-				<div className = "five columns"> &emsp;</div>
-
-				<div className = "three columns">
-					<button className = "edit_addSkillsButton " onClick = {this.toggleAddState}>GO TO ADD SKILLS</button>
+				<div className = "row edit_addSkillsButtonContainer ">
+					<button className = "edit_addSkillsButton " onClick = {this.toggleAddState}>
+					GO TO ADD SKILLS
+					</button>
 				</div>
-
-			</div>
 				)
 
 		if(this.state.component_opened == '' && this.props.editable )
 			return (
 			<div className = "row edit_addSkillsButtonContainer ">
-				<div className = "three columns"> &emsp;</div>
-
-				<div className = "three columns">
-					<button className = "edit_addSkillsButton " onClick = {this.toggleEditState}>EDIT SKILLS</button>
+				<div className = "six columns">
+					<button className = "edit_addSkillsButton " onClick = {this.toggleEditState}>
+					EDIT SKILLS
+					</button>
 				</div>
-				<div className = "three columns">
-					<button className = "edit_addSkillsButton " onClick = {this.toggleAddState}>ADD SKILLS</button>
+				<div className = "six columns">
+					<button className = "edit_addSkillsButton " onClick = {this.toggleAddState}>
+					ADD SKILLS
+					</button>
 				</div>
 
 			</div>
@@ -90,10 +87,9 @@ var UpdateSkills= React.createClass({
 
 	render: function () {
 		return (
-			<div>
-				<div className = "container">
-					{this.renderEditButton()}
-				</div>
+			<div className = "container">
+				{this.renderEditButton()}
+
 				{this.renderEditable()}
 			</div>
 		)
