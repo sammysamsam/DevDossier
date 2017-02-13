@@ -7,29 +7,28 @@
 
   <body>
 
-
-
   		<div id = "navbar">
 			<%= link_to root_path, {method: :get, :class => "home_navbar" } do %> 
 				<i class="fa fa-globe" aria-hidden="true"></i>
 			<% end %>
-		  	<span style = "font-size:10px;"> Logged In As: <%= @currentfullname%> </span>
-		<div style = "float:right;margin-right:10px;">
-	  		<%= link_to "Advanced Settings", edit_user_registration_path, {:class => "item_navbar"} %>	
-	  		<%= link_to "Sign Out", destroy_user_session_path, {method: :delete, :class => "item_navbar" }%>
-	   	</div>
 
+		  	<span style = "font-size:10px;"> Logged In As: <%= @currentfullname%> </span>
+
+			<div style = "float:right;margin-right:10px;">
+		  		<%= link_to "Advanced Settings", edit_user_registration_path, {:class => "item_navbar"} %>	
+		  		<%= link_to "Sign Out", destroy_user_session_path, {method: :delete, :class => "item_navbar" }%>
+		   	</div>
   		</div>
 		
- 		<%= react_component('ProfileREACT', {:profile => @profile,:editable => @editable}) %>
+		<div class = "container" style = "border-bottom:2px solid #ffccbc">
+ 			<%= react_component('Profile', {:profile => @profile,:editable => @editable}) %>
+ 		</div>
+
+ 		<div class = "container" style = "padding:20px;">		
 			
-		<div class = "container" style = "background-color: #fbe9e7;padding:20px;">
-			
-				<%= render partial: "display_skills", locals: {:profile => @profile} %>
+			<%= render partial: "display_skills", locals: {:profile => @profile} %>
 				
-				<%= react_component('UpdateSkillsREACT', {:profile => @profile, :editable => @editable}, :currState => @opened_page) %> 
-
+			<%= react_component('UpdateSkills', {:profile => @profile, :editable => @editable}, :currState => @opened_page) %> 
 		</div>
-
   </body>
 </html>

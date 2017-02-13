@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Devos</title>
-
+    <title>DevDossier</title>
   </head>
   <body>
-  <div style = "margin:40px;">
-<%= link_to "Sign Out", destroy_user_session_path,{method: :delete,:class => "button"} %>
-</div>
-  	<div class = "container">
-  	<h1 style = "text-align: center"> Welcome To Your New Profile</h1>
-  	<h6 style = "text-align: center">please fill out the following to get started:</h6>
-	<ul>
-	<% if @profile.errors.any? %>
-		<% @profile.errors.full_messages.each do |msg| %>
-		<li><%= msg %></li>
-		<% end %>
-	<% end %>
-	</ul>
+  	<div style = "margin:40px;">
+		<%= link_to "Sign Out", destroy_user_session_path,{method: :delete,:class => "button"} %>
+	</div>
+
+	<div class = "container">
+	  	<h1 style = "text-align: center"> Welcome To Your New Profile</h1>
+	  	<h6 style = "text-align: center">please fill out the following to get started:</h6>
+		
+		<ul>
+			<% if @profile.errors.any? %>
+				<% @profile.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+				<% end %>
+			<% end %>
+		</ul>
 	
-	<%= react_component('UpdateProfileREACT', profile: @profile, stage: "new" ) %>
-	
-    
+		<%= react_component('UpdateProfile', profile: @profile, stage: "new" ) %>
     </div>
+
   </body>
 </html>

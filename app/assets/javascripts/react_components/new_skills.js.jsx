@@ -3,7 +3,7 @@ var FElist = ["", "Angular.js","React.js","Ember.js", "Knockout.js","Aurelia.js"
 var BElist = ["", "Node.js","SQL","MongoDB","C#","PHP","Ruby","Scala","Clojure"]
 var FSlist = ["", "Ruby On Rails","MEAN","LAMP","Python"]
 
-var NewSkillsREACT = React.createClass({
+var NewSkills = React.createClass({
 
 	getInitialState: function() {
 		var skills = [];
@@ -18,30 +18,30 @@ var NewSkillsREACT = React.createClass({
 							
 							{exptype:"",header:"",experienceinfo:""},
 							{exptype:"",header:"",experienceinfo:""}],
-			skillsSelect:0,
+			selectedSkillIndex:0,
 		}
 	},
 
 //
-	updateSkillSelect: function(e_){
-		this.setState({skillsSelect:e_})		
+	updateSelectedSkillIndex: function(e_) {
+		this.setState({selectedSkillIndex:e_})		
 	},
 
 
-	update_Skill_Type: function(e_){			//type (frontend, backend, fullstack)
+	updateType: function(e_) {			//type (frontend, backend, fullstack)
 		var s = this.state.skillsInput;
 		s[0] = e_.target.value;
 		this.setState({skillsInput:s})		
 	},	
 
 
-	update_Education_Info: function(e_){			//education
+	updateEducationInfo: function(e_) {			//education
 		var s = this.state.skillsInput;
 		s[1].educationinfo = e_.target.value;
 		this.setState({skillsInput:s})		
 	},
 
-	toggle_Education_Type: function(number){			//checkbox education
+	toggleEducationType: function(number) {			//checkbox education
 		var s = this.state.skillsInput;
 		if(number == 0)
 		{
@@ -58,17 +58,17 @@ var NewSkillsREACT = React.createClass({
 //
 
 
-	update_WorkExp_Info1: function(e_){			//projects/repos/work exp 1
+	updateWorkExpInfo1: function(e_) {			//projects/repos/work exp 1
 		var s = this.state.skillsInput;
 		s[2].experienceinfo = e_.target.value;
 		this.setState({skillsInput:s})		
 	},
-	update_WorkExp_Header1: function(e_){			//projects/repos/work exp header
+	updateWorkExpHeader1: function(e_) {			//projects/repos/work exp header
 		var s = this.state.skillsInput;
 		s[2].header = e_.target.value;
 		this.setState({skillsInput:s})		
 	},
-	toggle_WorkExp_Type1: function(e_){			//radio experience
+	toggledWorkExpType1: function(e_) {			//radio experience
 		var s = this.state.skillsInput;
 		s[2].exptype = e_
 		this.setState({skillsInput:s})	
@@ -77,24 +77,24 @@ var NewSkillsREACT = React.createClass({
 //
 
 
-	update_WorkExp_Info2: function(e_){			//projects/repos/work exp 2
+	updateWorkExpInfo2: function(e_) {			//projects/repos/work exp 2
 		var s = this.state.skillsInput;
 		s[3].experienceinfo = e_.target.value;
 		this.setState({skillsInput:s})		
 	},
-	update_WorkExp_Header2: function(e_){			//projects/repos/work exp header
+	updateWorkExpHeader2: function(e_) {			//projects/repos/work exp header
 		var s = this.state.skillsInput;
 		s[3].header = e_.target.value;
 		this.setState({skillsInput:s})			
 	},
-	toggle_WorkExp_Type2: function(e_){			//radio experience
+	toggledWorkExpType2: function(e_) {			//radio experience
 		var s = this.state.skillsInput;
 		s[3].exptype = e_
 		this.setState({skillsInput:s})	
 	},
 
 //
-	selectSkill: function(e_){
+	selectSkill: function(e_) {
 		var skillsInput = this.state.skillsInput;
 		skillsInput[0] = e_.target.value;
 		this.setState({skillsInput:skillsInput});
@@ -102,25 +102,25 @@ var NewSkillsREACT = React.createClass({
 //
 
 
-	renderUpdatedLists: function(){
+	renderUpdatedLists: function() {
 
 		var list=FElist;
-		if(this.state.skillsSelect == 1)
+		if(this.state.selectedSkillIndex == 1)
 			list=BElist;
-		if(this.state.skillsSelect == 2)
+		if(this.state.selectedSkillIndex == 2)
 			list=FSlist;
 		x = this;
 
-		for(var i =0; i<this.state.skills.length; i++){
+		for(var i =0; i<this.state.skills.length; i++) {
 				var index = list.indexOf(this.state.skills[i][0]);
-				if (index != -1){
+				if (index != -1) {
 					list.splice(index,1);
 				}
 		}
 
 		return (
-			<select onChange = {x.update_Skill_Type} className = "u-full-width">
-					{list.sort().map(function(listValue,index){
+			<select onChange = {x.updateType} className = "u-full-width">
+					{list.sort().map(function(listValue,index) {
 						if(index != 0)
 							return(<option key = {index} value={listValue}> {listValue} </option>)
 						else
@@ -130,7 +130,7 @@ var NewSkillsREACT = React.createClass({
 			)
 	},
 
-	submitSkills(){
+	submitSkills() {
 		if(this.state.skillsInput[0] != "" && (this.state.skillsInput[1].school || this.state.skillsInput[1].self))
 		{
 			var skills = this.state.skills;	
@@ -159,9 +159,9 @@ var NewSkillsREACT = React.createClass({
 
 
 					<div id = "skillSelector">
-					    <div className = "skillsSelectorItem" onClick = {() => {this.updateSkillSelect(0)}}> Front-End </div>
-					    <div className = "skillsSelectorItem" onClick = {() =>{this.updateSkillSelect(1)}}> Back-End</div>
-					    <div className = "skillsSelectorItem" onClick = {() =>{this.updateSkillSelect(2)}}> Full-Stack </div>
+					    <div className = "selectedSkillIndexorItem" onClick = {() => {this.updateSelectedSkillIndex(0)}}> Front-End </div>
+					    <div className = "selectedSkillIndexorItem" onClick = {() =>{this.updateSelectedSkillIndex(1)}}> Back-End</div>
+					    <div className = "selectedSkillIndexorItem" onClick = {() =>{this.updateSelectedSkillIndex(2)}}> Full-Stack </div>
 					</div>
 
 
@@ -176,15 +176,15 @@ var NewSkillsREACT = React.createClass({
 
 							<div style = {{display:"inline-block",marginLeft:"10px"}}> 
 								University / Bootcamp 
-		    					<input type="checkbox"  onChange = {this.toggle_Education_Type.bind(null,0)} checked = {this.state.skillsInput[1].school}/>
+		    					<input type="checkbox"  onChange = {this.toggleEducationType.bind(null,0)} checked = {this.state.skillsInput[1].school}/>
 							</div>
 
 				    		<div style = {{display:"inline-block",marginLeft:"10px"}}> 
 					    		Self-Taught 
-		    					<input type="checkbox"  onChange = {this.toggle_Education_Type.bind(null,1)} checked = {this.state.skillsInput[1].self}/>
+		    					<input type="checkbox"  onChange = {this.toggleEducationType.bind(null,1)} checked = {this.state.skillsInput[1].self}/>
 				    		</div>
 							
-							<textarea style = {{minHeight:"155px"}} maxLength="250" onChange = {this.update_Education_Info} className = "u-full-width skillsTextBox" placeholder="Describe/list the courses, books and tutorials you've used to learn this skill (250 character limit)"></textarea>
+							<textarea style = {{minHeight:"155px"}} maxLength="250" onChange = {this.updateEducationInfo} className = "u-full-width skillsTextBox" placeholder="Describe/list the courses, books and tutorials you've used to learn this skill (250 character limit)"></textarea>
 						</div>
 
 
@@ -200,22 +200,22 @@ var NewSkillsREACT = React.createClass({
 										<div style = {{display:"inline-block",marginLeft:"5px",width:"70px"}}> 
 											
 											Work 
-											<input type="radio" name = "work1" onClick = {this.toggle_WorkExp_Type1.bind(null,"work")}/> 
+											<input type="radio" name = "work1" onClick = {this.toggledWorkExpType1.bind(null,"work")}/> 
 										</div>
 										<div style = {{display:"inline-block",marginLeft:"5px",width:"70px"}}> 
 											
 											Project 
-											<input type="radio" name = "work1" onClick = {this.toggle_WorkExp_Type1.bind(null,"project")}/> 
+											<input type="radio" name = "work1" onClick = {this.toggledWorkExpType1.bind(null,"project")}/> 
 										</div>
 									</div>
 
 									<div className = "eight columns">
-					  					<input maxLength = "50" onChange = {this.update_WorkExp_Header1} className = "u-full-width"  placeholder="Project Name or Company Name (optional: url to company page or repo)"/>
+					  					<input maxLength = "50" onChange = {this.updateWorkExpHeader1} className = "u-full-width"  placeholder="Project Name or Company Name (optional: url to company page or repo)"/>
 									</div>
 
 								</div>
 							
-								<textarea maxLength="200" onChange = {this.update_WorkExp_Info1} className = "u-full-width skillsTextBox" placeholder="Describe your role and what you did (200 character limit)"></textarea>
+								<textarea maxLength="200" onChange = {this.updateWorkExpInfo1} className = "u-full-width skillsTextBox" placeholder="Describe your role and what you did (200 character limit)"></textarea>
 					      			
 								<div className = "row">
 
@@ -223,22 +223,22 @@ var NewSkillsREACT = React.createClass({
 										<div style = {{display:"inline-block",marginLeft:"5px",width:"70px"}}>
 
 											Work 
-											<input type="radio" name = "work2" onClick = {this.toggle_WorkExp_Type2.bind(null,"work")}/> 
+											<input type="radio" name = "work2" onClick = {this.toggledWorkExpType2.bind(null,"work")}/> 
 										</div>
 										<div style = {{display:"inline-block",marginLeft:"5px",width:"70px"}}>
 											
 											Project 
-											<input type="radio" name = "work2" onClick = {this.toggle_WorkExp_Type2.bind(null,"project")}/> 
+											<input type="radio" name = "work2" onClick = {this.toggledWorkExpType2.bind(null,"project")}/> 
 										</div>
 									</div>
 
 									<div className = "eight columns">
-					  					<input maxLength = "50"  onChange = {this.update_WorkExp_Header2} className = "u-full-width"  placeholder="Project Name or Company Name (optional: url to company page or repo)" />
+					  					<input maxLength = "50"  onChange = {this.updateWorkExpHeader2} className = "u-full-width"  placeholder="Project Name or Company Name (optional: url to company page or repo)" />
 									</div>
 
 								</div>
 								
-								<textarea maxLength="200" onChange = {this.update_WorkExp_Info2} className = "u-full-width skillsTextBox" placeholder="Describe your role and what you did (200 character limit)"></textarea>
+								<textarea maxLength="200" onChange = {this.updateWorkExpInfo2} className = "u-full-width skillsTextBox" placeholder="Describe your role and what you did (200 character limit)"></textarea>
 							</div>
 						</div>
 					</div>

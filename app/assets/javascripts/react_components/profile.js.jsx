@@ -1,9 +1,8 @@
 
-var ProfileREACT = React.createClass({
+var Profile = React.createClass({
 
 
 	getInitialState: function() {
-	console.log(this.props.profile.skills)
 		let education = [];
 		
 		if(this.props.profile.education != null)
@@ -72,7 +71,7 @@ var ProfileREACT = React.createClass({
 		if(this.state.editingSTATE == true && this.props.editable == true)
 			return(
 					<div>
-						<UpdateProfileREACT profile = {this.props.profile} stage = "edit" toggle = {this.toggleEditState.bind(this)} />
+						<UpdateProfile profile = {this.props.profile} stage = "edit" toggle = {this.toggleEditState.bind(this)} />
 					</div>
 			)
 		else
@@ -93,34 +92,30 @@ var ProfileREACT = React.createClass({
 
 	render: function () {
 		return (
-			<div>
-				<div className = "container">
-					<div id = "generalInfoSection">
-						<div className = "row">
-							<div className = "two columns">&nbsp; </div>
-							<div className = "eight columns">
+			<div id = "generalInfoSection">
+				<div className = "row">
+					<div className = "two columns">&nbsp; </div>
+					<div className = "eight columns">
 
-								<h4 style = {{display:"inline"}}> 
-									{this.state.firstname + " " + this.state.lastname} 
-								</h4>  
+						<div id = "profileTitle"> 
+							{this.state.firstname + " " + this.state.lastname} 
+						</div>  
 
-								<p style = {{display:"inline",paddingLeft:"10px"}}> 
-									<i className="fa fa-street-view"></i> {this.state.location}
-								</p>  
+						<p style = {{display:"inline",paddingLeft:"10px"}}> 
+							<i className="fa fa-street-view"></i> {this.state.location}
+						</p>  
 
-								<h6 style = {{margin:"20spx 0px 5px 0px"}}>
-									{this.state.aboutme}
-								</h6>	
+						<div className = "aboutMeSection">
+							{this.state.aboutme}
+						</div>	
 
-								{this.renderEducationCourses()}
-								
-							</div>
-							<div style = {{float:"right"}}> 
-								{this.renderEditButton()} 
-							</div>		
-
-						</div>
+						{this.renderEducationCourses()}
+						
 					</div>
+					<div style = {{float:"right"}}> 
+						{this.renderEditButton()} 
+					</div>		
+
 				</div>
 				{this.renderEditable()}
 			</div>

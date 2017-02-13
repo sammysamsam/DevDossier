@@ -7,11 +7,9 @@ class ProfilesController < ApplicationController
 		if (current_user.profile_id == nil)						#NEW USER
 			redirect_to new_profile_path					
 		else
-
 			@profile = Profile.find_by_public_name(params[:public_name])
 			@current_profile = Profile.find(current_user.profile_id)
 			
-
 			if(@profile == nil)
 				redirect_to profile_path(public_name: @current_profile.public_name)
 			end			

@@ -1,11 +1,18 @@
 // Place all the styles related to the Profile controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+h2{
+	font-size:15px;
+}
+textarea{
+	resize:vertical;
+}
+
 
 #navbar{
 	padding:10px 0px 10px 0px;
 	width:100vw;
-	background-color:#ffab91 ;
+	background-color:#ffccbc;
 }
 .home_navbar{
 	text-decoration:none;
@@ -37,7 +44,12 @@
 
 
 #generalInfoSection{
-	padding:60px 15px 60px 15px;
+	padding:80px 15px 80px 15px;
+}
+
+#profileTitle{
+	display:inline;
+	font-size:35px;
 }
 #profileeditbutton{
 	color:#68615f;
@@ -51,8 +63,11 @@
 }
 
 .aboutMeSection{
-	font-size:15px;
-	padding-bottom: 10px;
+	font-size:14px;
+	padding: 10px 0px 10px 0px;
+	font-family: 'Roboto','Raleway';	
+	color:#4c4b4a;
+
 }
 
 .educationCourseContainer{
@@ -63,9 +78,11 @@
 }
 .educationItem{
 	font-size:16px;
+
 }
 .educationCaption{
 	font-size:13px;
+	color:#4c4b4a;
 }
 
 .courseSection{
@@ -73,6 +90,7 @@
 }
 .courseItem{
 	font-size:12px;
+	color:#4c4b4a;
 }
 
 
@@ -103,10 +121,7 @@
 	height:50px;
 	width:33%;
 }
-textarea{
-	max-height:500px;
-	resize:vertical;
-}
+
 
 
 		/* **** */
@@ -116,6 +131,7 @@ textarea{
 	/*background-color: #f4f4f4; */
 	padding:25px;
 	border-radius:10px;
+	font-family: 'Roboto','Raleway';
 }
 
 .skillsCard_Section{
@@ -136,16 +152,15 @@ margin-top:10px;
 
 .skillsCard_Title{
 	font-weight: bold;
-	font-size:16px;
+	font-size:17px;
 	margin-top:-30px;
 	font-family: 'Poppins','Raleway';
 	padding-top:10px;
 	height:50px;
 
 }
-.skillsCard_edItem{
-	font-family: 'Roboto','Raleway';	
-color:grey;
+.skillsCard_edItem{	
+	color:#4c4c4c;
 }
 .skillsCard_hr{
 	color:black;;

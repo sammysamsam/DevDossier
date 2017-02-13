@@ -1,5 +1,5 @@
 
-var UpdateSkillsREACT = React.createClass({
+var UpdateSkills= React.createClass({
 
 	getInitialState: function() {
 		console.log(this.props.profile)

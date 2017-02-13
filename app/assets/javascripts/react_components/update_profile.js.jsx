@@ -1,10 +1,8 @@
 
-var UpdateProfileREACT = React.createClass({
+var UpdateProfile = React.createClass({
 	getInitialState: function() {
 
-		//parse education
-
-		console.log(this.props);
+		//Parse Education
 		let education = [];
 		if(this.props.profile.education != null)
 			education = JSON.parse(this.props.profile.education);
@@ -44,19 +42,12 @@ var UpdateProfileREACT = React.createClass({
 		this.setState({aboutme:e_.target.value})
 	},
 
-
-
-//
-//	["NYU--BA--chemistry || NYU--BA--chemistry"]
-//
-
-
-	updateEducationInput1: function(index,e_){
+	updateEducation_School: function(index,e_){
 		var ed = this.state.education;
 		ed[index][0] = e_.target.value;
 		this.setState({education:ed})		
 	},
-	updateEducationInput2: function(index,e_){
+	updateEducation_Degree: function(index,e_){
 		var ed = this.state.education;
 		ed[index][1] = e_.target.value;
 		this.setState({education:ed})	
@@ -181,7 +172,7 @@ var UpdateProfileREACT = React.createClass({
 
 								<div className = "six columns">				  
 							  		<label >Education (+ Year)</label>
-							  		<input onChange = {x.updateEducationInput1.bind(x,index)}  className = "u-full-width" value={listValue[0]} id="education"/>
+							  		<input onChange = {x.updateEducation_School.bind(x,index)}  className = "u-full-width" value={listValue[0]} id="education"/>
 							  	</div>
 
 								<div className = "three columns">				  
@@ -191,7 +182,7 @@ var UpdateProfileREACT = React.createClass({
 
 							  	<div className = "three columns">
 							  		<label htmlFor="education_degree">Degree</label>
-								   <select defaultValue = {listValue[1]} onChange = {x.updateEducationInput2.bind(x,index)} className = "u-full-width" id = "education_degree">
+								   <select defaultValue = {listValue[1]} onChange = {x.updateEducation_Degree.bind(x,index)} className = "u-full-width" id = "education_degree">
 			        					<option  value=" "> n/a </option>
 			        					<option  value="BA">Bachelor of Arts</option>
 			        					<option value="BS">Bachelor of Science</option>
